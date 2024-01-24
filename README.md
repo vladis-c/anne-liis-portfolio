@@ -69,7 +69,7 @@ ____
 | 1.   | Idea                                        | ✓    |
 | 2.   | Technology Research                         | ✓    |
 | 3.   | Technology Template test                    | ✓    |
-| 4.   | Custom code setup                           |      |
+| 4.   | Custom code setup                           | ✓    |
 | 5.   | Custom code setup test                      |      |
 | 6.   | Think of a content/visuals/UXI              |      |
 | 7.   | Think of an approach                        |      |
