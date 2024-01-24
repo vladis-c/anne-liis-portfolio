@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "next/core-web-vital",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ]
+}
