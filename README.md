@@ -7,14 +7,14 @@ Portfolio site of Anne Liis.
 - Anne Liis Kasterpalu - inspirer, content manager, owner
 - Vladislav Cherkasheninov - inspired, code generator, giver
 
-____
+---
 
 ![Image](/assets/images/IMAGE%202024-01-13%2010:37:28.jpg)
 
 ## Architechture
 
-| Stack        | Tech                           | Description                                                                                           | Link                                              |
-| ------------ | ------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Stack        | Tech                           | Description                                                                                           | Link                                                                                          |
+| ------------ | ------------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | Language     | Typescript                     |
 | Framework    | NextJS 14                      | SSR (Server Side Rendering) rendering is perfect SEO                                                  |
 | CMS          | Contentful                     | Easy to use. Somewhat good free tier                                                                  |
@@ -22,7 +22,7 @@ ____
 | Styles       | Tailwind                       |
 | Components   | Contentful CMS Rich Components | To be used along with HTML markup                                                                     |
 | Database     | Contentful                     | Database for content and assets. Upto 10000 units free.                                               |
-| Environments | Contentful                     | 2 environments free: Development and Production                                                       |
+| Environments | Contentful                     | 3 environments free: Development, Staging and Production                                              |
 | API          | NextJS integrated API          |
 | Hosting      | Vercel                         | Trusted NextJS websites hosting provider. Free.                                                       |
 | Domain       | **--TBD--**                    | Somewhat around 20$ per year.                                                                         |
@@ -30,37 +30,29 @@ ____
 
 ## UX/UI Design
 
-| \_\_           | \_\_  | \_\_                                   |
-| -------------- | ----- | -------------------------------------- |
-| Design/Styling | Figma | Anne Liis (?)                          |
-| Self           | ---   | Styling ongo while developing the rest |
-| Colors         | ---   | **--TBD--**                            |
-| Fonts          | ---   | **--TBD--**                            |
-| Sizing         | ---   | **--TBD--**                            |
+| \_\_           | \_\_     | \_\_        |
+| -------------- | -------- | ----------- |
+| Design/Styling | Adobe XD |             |
+| Colors         | ---      | **--TBD--** |
+| Fonts          | ---      | **--TBD--** |
+| Sizing         | ---      | **--TBD--** |
 
 - Colors, sizes and fonts to be decided
 
 ## Branches, domains, environments
 
-1. Hosting of `admin.` subdomain with extra authentication for checking live changes before deploying them to production.
-2. Hosting of `dev.` subdomain for development: tests of fixed issues or enhancements
-3. Git: `main` points to `production` and `develop` points to `development`
+Github Branches: `master`, `development`.
+Contentful Branches: `master`, `development` and `staging`.
 
 ## When live
 
-### The order of content management
+Anne's Branch: `staging`,
+Vlad's Branch: `development`,
+Production Branch: `production`
 
-1. Content added to `development` environment on **Contentful CMS content management pannel**.
-2. Content is visible on `admin.` subdomain for testing
-3. Deploying the content to `production` environment on **Contentful CMS content management pannel**.
-4. Content goes live to the main domain.
-
-### The order of support (aka fixing bugs, enhancement and changes)
-
-1. Issues are identified and put into cards on GitHub management console.
-2. Bugs are fixed on local environment without affecting any subdomains or main domain.
-3. Changes are deployed to `dev.` subdomain.
-4. Deployment to production main domain.
+Anne uses `staging` in Contentful and `staging.` subdomain to see the changes
+Vlad uses `development` in Git and Contentful and `dev.` subdomain to see the changes.
+Vlad merges `development`to `staging` if Anne requests to see the changes. Vlad merges `staging` to `production`.
 
 ## Stages
 
@@ -70,10 +62,10 @@ ____
 | 2.   | Technology Research                         | ✓    |
 | 3.   | Technology Template test                    | ✓    |
 | 4.   | Custom code setup                           | ✓    |
-| 5.   | Custom code setup test                      |      |
+| 5.   | Custom code setup test                      | ✓    |
 | 6.   | Think of a content/visuals/UXI              |      |
 | 7.   | Think of an approach                        |      |
-| 8.   | Decision on cooperation                     |      |
+| 8.   | Decision on cooperation                     | ✓    |
 | 9.   | Implementation (UX/UI)                      |      |
 | 9.   | Implementation (Code/CMS)                   |      |
 | 10.  | Testing                                     |      |
