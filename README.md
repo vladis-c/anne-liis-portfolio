@@ -71,3 +71,6 @@ Vlad merges `development`to `staging` if Anne requests to see the changes. Vlad 
 | 10.  | Testing                                     |      |
 | 11.  | Deployment to production                    |      |
 | 12.  | Additions, maintainance, content management |      |
+
+
+Testing the project tab
