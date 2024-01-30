@@ -3,6 +3,7 @@ import {Environment} from '@/types';
 
 const baseUrl = process.env.CONTENTFUL_BASE_URI;
 const spaceId = process.env.CONTENTFUL_SPACE_ID;
+const POST = 'post';
 
 export const getEntries = async (env: Environment = 'development') => {
   const res = await fetch(
@@ -21,17 +22,21 @@ export const getEntries = async (env: Environment = 'development') => {
   return res.json();
 };
 
-export const getSpaceEntries = async (id: string) => {
+export const getPosts = async () => {
   const data = await getEntries();
-  const documents: {maintext: Document; date: string}[] = data.items
-    .filter((e: any) => e.sys.contentType.sys.id === id)
-    .map((x: any) => ({
-      maintext: x.fields.maintext[LOCALE] as Document,
-      date: x.fields.date[LOCALE] as string,
-    }));
-  const sortedDocuments = documents.sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-  );
-  const finalDocuments = sortedDocuments.map(({maintext}) => ({maintext}));
-  return finalDocuments;
+  const documents = data.items
+    .filter((e: any) => e.sys.contentType.sys.id === POST)
+    .map((x: any) => {
+      const imageId = x.fields.image[LOCALE].sys.id;
+      const asset = (data.includes.Asset as any[]).find((x: any) => {
+        return x.fields.file[LOCALE].url.includes(imageId);
+      }).fields.file[LOCALE];
+      return {
+        title: x.fields.title[LOCALE],
+        description: x.fields.description[LOCALE],
+        date: x.fields.date[LOCALE],
+        image: {url: 'https:' + asset.url},
+      };
+    });
+  return documents;
 };
