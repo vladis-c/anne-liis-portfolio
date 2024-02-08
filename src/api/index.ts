@@ -32,10 +32,15 @@ export const getPosts = async () => {
         return x.fields.file[LOCALE].url.includes(imageId);
       }).fields.file[LOCALE];
       return {
+        id: x.sys.id + x.fields.title[LOCALE],
         title: x.fields.title[LOCALE],
         description: x.fields.description[LOCALE],
         date: x.fields.date[LOCALE],
-        image: {url: 'https:' + asset.url},
+        image: {
+          url: 'https:' + asset.url,
+          width: asset.details.image.width,
+          height: asset.details.image.height,
+        },
       };
     });
   return documents;
