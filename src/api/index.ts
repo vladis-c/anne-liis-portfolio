@@ -1,9 +1,8 @@
 import {LOCALE} from '@/constants';
-import {Environment} from '@/types';
+import {Environment, ApiPosts, Post, CONTENT_TYPES} from '@/types';
 
 const baseUrl = process.env.CONTENTFUL_BASE_URI;
 const spaceId = process.env.CONTENTFUL_SPACE_ID;
-const POST = 'post';
 
 export const getEntries = async (env: Environment = 'development') => {
   const res = await fetch(
@@ -23,25 +22,31 @@ export const getEntries = async (env: Environment = 'development') => {
 };
 
 export const getPosts = async () => {
-  const data = await getEntries();
+  const data = (await getEntries()) as ApiPosts;
   const documents = data.items
-    .filter((e: any) => e.sys.contentType.sys.id === POST)
-    .map((x: any) => {
-      const imageId = x.fields.image[LOCALE].sys.id;
-      const asset = (data.includes.Asset as any[]).find((x: any) => {
-        return x.fields.file[LOCALE].url.includes(imageId);
-      }).fields.file[LOCALE];
+    .filter(item => item.sys.contentType.sys.id === CONTENT_TYPES.POST)
+    .map(item => {
+      const imageId = item.fields.image[LOCALE].sys.id;
+      const asset = data.includes.Asset.find(asset => {
+        return asset.fields.file[LOCALE].url.includes(imageId);
+      })?.fields.file[LOCALE];
+
       return {
-        id: x.sys.id + x.fields.title[LOCALE],
-        title: x.fields.title[LOCALE],
-        description: x.fields.description[LOCALE],
-        date: x.fields.date[LOCALE],
-        image: {
-          url: 'https:' + asset.url,
-          width: asset.details.image.width,
-          height: asset.details.image.height,
-        },
+        id: item.sys.id + item.fields.title[LOCALE],
+        title: item.fields.title[LOCALE],
+        description:
+          item.fields.description !== undefined
+            ? item.fields.description[LOCALE]
+            : undefined,
+        date: item.fields.date[LOCALE],
+        image: asset
+          ? {
+              url: 'https:' + asset.url,
+              width: asset.details.image.width,
+              height: asset.details.image.height,
+            }
+          : null,
       };
-    });
+    }) as Post[];
   return documents;
 };
