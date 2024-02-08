@@ -21,7 +21,7 @@ export const getEntries = async (env: Environment = 'development') => {
   return res.json();
 };
 
-export const getPosts = async () => {
+export const getPosts = async (slug?: string) => {
   const data = (await getEntries()) as ApiPosts;
   const documents = data.items
     .filter(item => item.sys.contentType.sys.id === CONTENT_TYPES.POST)
@@ -33,6 +33,7 @@ export const getPosts = async () => {
 
       return {
         id: item.sys.id + item.fields.title[LOCALE],
+        slug: item.fields.title[LOCALE].toLowerCase(),
         title: item.fields.title[LOCALE],
         description:
           item.fields.description !== undefined
@@ -48,5 +49,8 @@ export const getPosts = async () => {
           : null,
       };
     }) as Post[];
+  if (slug) {
+    return documents.filter(d => d.slug === slug);
+  }
   return documents;
 };

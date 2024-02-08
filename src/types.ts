@@ -55,6 +55,7 @@ export type PostImage = {
 
 export type Post = {
   id: string;
+  slug: string;
   title: string;
   description?: string;
   date: string;
