@@ -11,9 +11,7 @@ export default async function Home() {
   const Contents = (): React.ReactNode => {
     return documents && documents.length > 0
       ? documents.map(d => {
-          const Text = documentToReactComponents(
-            d.description as unknown as Document,
-          );
+          const Text = documentToReactComponents(d.document);
           return (
             <div key={d.id}>
               <Link href={`/posts/${d.slug}`}>
@@ -21,8 +19,8 @@ export default async function Home() {
                   <Image
                     src={d.image.url}
                     alt={d.title}
-                    width={d.image.width}
-                    height={d.image.height}
+                    width={d.image.width / 2}
+                    height={d.image.height / 2}
                     placeholder="empty"
                   />
                 ) : null}

@@ -1,3 +1,5 @@
+import { Document } from "@contentful/rich-text-types";
+
 export type Environment = 'master' | 'development' | 'staging';
 
 export const CONTENT_TYPES = {
@@ -6,7 +8,12 @@ export const CONTENT_TYPES = {
 
 export type ContentType = ObjectValues<typeof CONTENT_TYPES>;
 
+type ApiTag = {
+  sys: {id: string};
+};
+
 type ApiItem = {
+  metadata: {tags: ApiTag[]};
   sys: {
     contentType: {
       sys: {id: ContentType};
@@ -57,7 +64,10 @@ export type Post = {
   id: string;
   slug: string;
   title: string;
-  description?: string;
+  document: Document
   date: string;
   image: PostImage | null;
+  meta: {
+    tags: string[];
+  };
 };

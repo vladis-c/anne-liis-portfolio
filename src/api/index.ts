@@ -1,5 +1,6 @@
 import {LOCALE} from '@/constants';
 import {Environment, ApiPosts, Post, CONTENT_TYPES} from '@/types';
+import {Document} from '@contentful/rich-text-types';
 
 const baseUrl = process.env.CONTENTFUL_BASE_URI;
 const spaceId = process.env.CONTENTFUL_SPACE_ID;
@@ -12,7 +13,7 @@ export const getEntries = async (env: Environment = 'development') => {
       headers: {
         Authorization: `Bearer ${process.env.CONTENTFUL_MANAGEMENT_KEY}`,
       },
-      // next: { revalidate: 1 },
+      // next: {revalidate: 1},
     },
   );
   if (!res.ok) {
@@ -35,10 +36,7 @@ export const getPosts = async (slug?: string) => {
         id: item.sys.id + item.fields.title[LOCALE],
         slug: item.fields.title[LOCALE].toLowerCase(),
         title: item.fields.title[LOCALE],
-        description:
-          item.fields.description !== undefined
-            ? item.fields.description[LOCALE]
-            : undefined,
+        document: item.fields.description?.[LOCALE] as unknown as Document,
         date: item.fields.date[LOCALE],
         image: asset
           ? {
@@ -47,8 +45,11 @@ export const getPosts = async (slug?: string) => {
               height: asset.details.image.height,
             }
           : null,
-      };
-    }) as Post[];
+        meta: {
+          tags: item.metadata.tags.map(t => t.sys.id),
+        },
+      } as Post;
+    });
   if (slug) {
     return documents.filter(d => d.slug === slug);
   }
