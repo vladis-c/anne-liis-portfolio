@@ -39,16 +39,18 @@ export async function generateMetadata(
 
 export default async function PostPage({params}: PostPageProps) {
   const post = (await getPosts(params.slug))[0];
-
+  // uncomment if revalidation is needed. TODO: turn on in production ('master')
+  // revalidateTag(CONTENT_TYPES.POST);
   const PostContent = (): React.ReactNode => {
     if (!post) {
       return null;
     }
     const Text = documentToReactComponents(post.document);
     return (
-      <div key={post.id}>
+      <div>
         {post.image ? (
           <Image
+            priority
             src={post.image.url}
             alt={post.title}
             width={post.image.width / 2}
@@ -58,7 +60,7 @@ export default async function PostPage({params}: PostPageProps) {
         ) : null}
         {Text}
         {post.meta.tags.map(tag => (
-          <p>{tag}</p>
+          <p key={tag}>{tag}</p>
         ))}
       </div>
     );

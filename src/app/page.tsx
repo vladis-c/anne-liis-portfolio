@@ -1,5 +1,4 @@
 import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
-import {Document} from '@contentful/rich-text-types';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -17,6 +16,7 @@ export default async function Home() {
               <Link href={`/posts/${d.slug}`}>
                 {d.image ? (
                   <Image
+                    priority
                     src={d.image.url}
                     alt={d.title}
                     width={d.image.width / 2}

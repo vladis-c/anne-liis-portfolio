@@ -4,8 +4,12 @@ import {Document} from '@contentful/rich-text-types';
 
 const baseUrl = process.env.CONTENTFUL_BASE_URI;
 const spaceId = process.env.CONTENTFUL_SPACE_ID;
+const currentEnv = process.env.CURRENT_ENV;
 
-export const getEntries = async (env: Environment = 'development') => {
+export const getEntries = async () => {
+  const env: Environment = currentEnv
+    ? (currentEnv as Environment)
+    : 'development';
   const res = await fetch(
     `${baseUrl}/spaces/${spaceId}/environments/${env}/public/entries`,
     {
@@ -14,6 +18,9 @@ export const getEntries = async (env: Environment = 'development') => {
         Authorization: `Bearer ${process.env.CONTENTFUL_MANAGEMENT_KEY}`,
       },
       // next: {revalidate: 1},
+      next: {
+        tags: [CONTENT_TYPES.POST],
+      },
     },
   );
   if (!res.ok) {
