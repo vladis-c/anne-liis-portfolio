@@ -1,8 +1,9 @@
 import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
-import Image from 'next/image';
+
 import Link from 'next/link';
 
 import {getPosts} from '@/api';
+import Image from '@/components/Image';
 
 export default async function Home() {
   const documents = await getPosts();
@@ -14,16 +15,7 @@ export default async function Home() {
           return (
             <div key={d.id}>
               <Link href={`/posts/${d.slug}`}>
-                {d.image ? (
-                  <Image
-                    priority
-                    src={d.image.url}
-                    alt={d.title}
-                    width={d.image.width / 2}
-                    height={d.image.height / 2}
-                    placeholder="empty"
-                  />
-                ) : null}
+                {d.image ? <Image url={d.image.url} alt={d.title} /> : null}
                 {Text}
               </Link>
             </div>

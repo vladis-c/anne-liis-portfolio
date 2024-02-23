@@ -1,11 +1,16 @@
 import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
-import Image from 'next/image';
 import {Metadata, ResolvedMetadata} from 'next';
+import {revalidateTag} from 'next/cache';
 
 import {getPosts} from '@/api';
 import {AUTHOR} from '@/constants';
+import Image from '@/components/Image';
+import {CONTENT_TYPES, Environment} from '@/types';
 
 type PostPageProps = {params: {slug: string}};
+const currentEnv = process.env.CURRENT_ENV as Environment;
+const production =
+  process.env.NODE_ENV === 'production' || currentEnv === 'master';
 
 export async function generateMetadata(
   {params}: PostPageProps,
@@ -40,7 +45,7 @@ export async function generateMetadata(
 export default async function PostPage({params}: PostPageProps) {
   const post = (await getPosts(params.slug))[0];
   // uncomment if revalidation is needed. TODO: turn on in production ('master')
-  // revalidateTag(CONTENT_TYPES.POST);
+  production && revalidateTag(CONTENT_TYPES.POST);
   const PostContent = (): React.ReactNode => {
     if (!post) {
       return null;
@@ -48,16 +53,7 @@ export default async function PostPage({params}: PostPageProps) {
     const Text = documentToReactComponents(post.document);
     return (
       <div>
-        {post.image ? (
-          <Image
-            priority
-            src={post.image.url}
-            alt={post.title}
-            width={post.image.width / 2}
-            height={post.image.height / 2}
-            placeholder="empty"
-          />
-        ) : null}
+        {post.image ? <Image url={post.image.url} alt={post.title} /> : null}
         {Text}
         {post.meta.tags.map(tag => (
           <p key={tag}>{tag}</p>

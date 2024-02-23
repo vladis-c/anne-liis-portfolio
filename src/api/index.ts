@@ -38,7 +38,6 @@ export const getPosts = async (slug?: string) => {
       const asset = data.includes.Asset.find(asset => {
         return asset.fields.file[LOCALE].url.includes(imageId);
       })?.fields.file[LOCALE];
-
       return {
         id: item.sys.id + item.fields.title[LOCALE],
         slug: item.fields.title[LOCALE].toLowerCase(),
