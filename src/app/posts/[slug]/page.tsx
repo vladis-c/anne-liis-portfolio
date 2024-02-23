@@ -12,18 +12,16 @@ const currentEnv = process.env.CURRENT_ENV as Environment;
 const production =
   process.env.NODE_ENV === 'production' || currentEnv === 'master';
 
-export async function generateMetadata(
-  {params}: PostPageProps,
-  parent: ResolvedMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
   const {title, document, meta, image} = (await getPosts(params.slug))[0];
-  const previousImages = parent.openGraph?.images || [];
   const handleImages = () => {
     const images: string[] = [];
     if (image !== null) {
       images.push(image.url);
     }
-    return [...images, ...previousImages];
+    return [...images];
   };
   return {
     title,
