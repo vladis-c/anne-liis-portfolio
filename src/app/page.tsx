@@ -1,9 +1,9 @@
 import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
-
 import Link from 'next/link';
 
 import {getPosts} from '@/api';
 import Image from '@/components/Image';
+import Cube from '@/components/Animated/Cube';
 
 export default async function Home() {
   const documents = await getPosts();
@@ -26,6 +26,7 @@ export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <p>Checking if it works. This name is fetched from the server</p>
+      <Cube />
       {Contents()}
     </main>
   );

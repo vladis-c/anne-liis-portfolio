@@ -20,6 +20,7 @@ Portfolio site of Anne Liis.
 | CMS          | Contentful                     | Easy to use. Somewhat good free tier                                                                  |
 | SEO          | NextJS                         | SEO is included. Enriching code with the possibility to repost the conent of websites in Social Media | https://www.youtube.com/watch?v=EnO_C9pvZF0&t=17s https://www.youtube.com/watch?v=wTGVHLyV09M |
 | Styles       | Tailwind                       |
+| Animations   | React Spring                   | https://react-spring.dev/docs/getting-started                                                         |
 | Components   | Contentful CMS Rich Components | To be used along with HTML markup                                                                     |
 | Database     | Contentful                     | Database for content and assets. Upto 10000 units free.                                               |
 | Environments | Contentful                     | 3 environments free: Development, Staging and Production                                              |
@@ -71,6 +72,5 @@ Vlad merges `development`to `staging` if Anne requests to see the changes. Vlad 
 | 10.  | Testing                                     |      |
 | 11.  | Deployment to production                    |      |
 | 12.  | Additions, maintainance, content management |      |
-
 
 Testing the project tab
