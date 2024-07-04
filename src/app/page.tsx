@@ -1,16 +1,20 @@
-import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
-import Link from 'next/link';
-
-import Image from '@/components/Image';
-import Cube from '@/components/Animated/Cube';
-import {getFrontPage} from '@/api/getFrontPage';
+import BgImage from '@/components/BgImage';
+import {getHomeContent} from '@/api/getHomeContent';
 
 export default async function Home() {
-  const fp = await getFrontPage();
-  console.log('got fp data', fp);
+  const homeContent = await getHomeContent();
+  console.log('got fp data', homeContent);
+
+  if (!homeContent) {
+    return null;
+  }
+  const {
+    navigation: {bgImage},
+  } = homeContent;
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Cube />
+    <main className="flex flex-col items-center justify-between">
+      {bgImage ? <BgImage url={bgImage} alt={'Bg image'} /> : null}
     </main>
   );
 }

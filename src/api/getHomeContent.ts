@@ -13,7 +13,7 @@ type FrontPageData = {
   };
 };
 
-export const getFrontPage = async () => {
+export const getHomeContent = async () => {
   try {
     const allEntries = await getContentful<ContentfulEntriesApiData>();
     // get navigation entry

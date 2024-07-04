@@ -1,25 +1,27 @@
 import React from 'react';
 import NextImage from 'next/image';
 
-import {IMAGE} from '@/constants';
-
 type ImageProps = {
   url: string;
   alt: string;
 };
 
-const Image = ({url, alt}: ImageProps) => {
+const BgImage = ({url, alt}: ImageProps) => {
   return (
     <NextImage
       priority
       src={url}
       alt={alt}
-      width={IMAGE.WIDTH}
-      height={IMAGE.HEIGHT}
+      width={1920}
+      height={1080}
+      sizes="100vw"
+      style={{
+        width: '100%',
+        height: 'auto',
+      }}
       placeholder="empty"
-      style={{objectFit: 'fill'}}
     />
   );
 };
 
-export default Image;
+export default BgImage;
