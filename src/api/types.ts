@@ -3,6 +3,7 @@ export type Environment = 'master' | 'development' | 'staging';
 // ENTRIES //
 export type ContentfulEntriesApiData = {
   items: NavigationEntry[]; // | any other entry
+  includes: {Asset: Asset[]};
   limit: number;
   skip: number;
   sys: {type: string};
@@ -47,6 +48,11 @@ type Fields = {
   title: {
     [k in string]: string;
   };
+  image: {
+    [k in string]: {
+      sys: {id: string};
+    };
+  };
 };
 
 type ItemSys = {
@@ -69,5 +75,24 @@ type ContentType = {
     id: string;
     linkType: string;
     type: string;
+  };
+};
+
+type Asset = {
+  fields: {
+    file: {
+      [k in string]: {
+        contentType: string;
+        details: {
+          image: {
+            height: number;
+            width: number;
+          };
+          size: number;
+        };
+        fileName: string;
+        url: string;
+      };
+    };
   };
 };

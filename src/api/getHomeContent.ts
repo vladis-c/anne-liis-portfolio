@@ -16,22 +16,33 @@ type FrontPageData = {
 export const getHomeContent = async () => {
   try {
     const allEntries = await getContentful<ContentfulEntriesApiData>();
-    // get navigation entry
-    // 1. find navigation entry (should be only one)
-    const navigationEntry = allEntries?.items.find(
-      item => item.sys.contentType.sys.id === ENTRIES.CONTENT_TYPES.NAVIGATION,
-    );
 
     const frontPageData = {
       navigation: {menu: [], name: '', contacts: [], bgImage: ''},
     } as FrontPageData;
+
+    if (!allEntries) {
+      return frontPageData;
+    }
+
+    const navigationEntry = allEntries.items.find(
+      item => item.sys.contentType.sys.id === ENTRIES.CONTENT_TYPES.NAVIGATION,
+    );
 
     if (navigationEntry) {
       frontPageData.navigation.menu = navigationEntry.fields.menu[LANG];
       frontPageData.navigation.name =
         navigationEntry.fields.name[LANG].content[0].content[0].value;
       frontPageData.navigation.contacts = navigationEntry.fields.contacts[LANG];
-      frontPageData.navigation.bgImage = navigationEntry.fields.imageUrl[LANG];
+
+      const bgImageId = navigationEntry.fields.image[LANG].sys.id;
+      const foundImage = allEntries.includes.Asset.find(asset =>
+        asset.fields.file[LANG].url.includes(bgImageId),
+      );
+      if (foundImage) {
+        frontPageData.navigation.bgImage =
+          'https:' + foundImage.fields.file[LANG].url;
+      }
     }
     return frontPageData;
   } catch (error) {
