@@ -1,12 +1,11 @@
 import type {Metadata} from 'next';
-import {Inter} from 'next/font/google';
+
 import {getServerSession} from 'next-auth';
 
 import './globals.css';
 import authOptions from './api/auth/[...nextauth]/authOptions';
-import {Environment} from '@/types';
-
-const inter = Inter({subsets: ['latin']});
+import {Environment} from '@/api/types';
+import {abel, italiana} from './fonts';
 
 const currentEnv = process.env.CURRENT_ENV as Environment;
 const stagingUser = process.env.STAGING_USER;
@@ -29,8 +28,8 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${italiana.variable} ${abel.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

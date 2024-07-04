@@ -9,12 +9,13 @@ export default async function Home() {
     return null;
   }
   const {
-    navigation: {bgImage},
+    navigation: {bgImage, name},
   } = homeContent;
 
   return (
     <main className="flex flex-col items-center justify-between">
       {bgImage ? <BgImage url={bgImage} alt={'Bg image'} /> : null}
+      <h1 className="font-h">{name}</h1>
     </main>
   );
 }
