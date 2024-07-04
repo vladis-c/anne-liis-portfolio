@@ -1,9 +1,9 @@
 import BgImage from '@/components/BgImage';
 import {getHomeContent} from '@/api/getHomeContent';
+import Contentful from '@/components/Contentful/Contentful';
 
 export default async function Home() {
   const homeContent = await getHomeContent();
-  console.log('got fp data', homeContent);
 
   if (!homeContent) {
     return null;
@@ -14,8 +14,8 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between">
-      {bgImage ? <BgImage url={bgImage} alt={'Bg image'} /> : null}
-      <h1 className="font-h">{name}</h1>
+      {/* {bgImage ? <BgImage url={bgImage} alt={'Bg image'} /> : null} */}
+      <Contentful document={name} />
     </main>
   );
 }

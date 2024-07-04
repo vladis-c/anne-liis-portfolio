@@ -1,3 +1,4 @@
+import {Document} from '@contentful/rich-text-types';
 import {getContentful} from '.';
 import ENTRIES from './entries';
 import {ContentfulEntriesApiData} from './types';
@@ -7,7 +8,7 @@ const LANG = 'en-US';
 type FrontPageData = {
   navigation: {
     menu: string[];
-    name: string;
+    name: Document;
     contacts: string[];
     bgImage: string;
   };
@@ -18,7 +19,7 @@ export const getHomeContent = async () => {
     const allEntries = await getContentful<ContentfulEntriesApiData>();
 
     const frontPageData = {
-      navigation: {menu: [], name: '', contacts: [], bgImage: ''},
+      navigation: {menu: [], name: {} as Document, contacts: [], bgImage: ''},
     } as FrontPageData;
 
     if (!allEntries) {
@@ -31,8 +32,11 @@ export const getHomeContent = async () => {
 
     if (navigationEntry) {
       frontPageData.navigation.menu = navigationEntry.fields.menu[LANG];
-      frontPageData.navigation.name =
-        navigationEntry.fields.name[LANG].content[0].content[0].value;
+      frontPageData.navigation.name = navigationEntry.fields.name[
+        LANG
+      ] as Document;
+
+      // navigationEntry.fields.name[LANG].content[0].content[0].value;
       frontPageData.navigation.contacts = navigationEntry.fields.contacts[LANG];
 
       const bgImageId = navigationEntry.fields.image[LANG].sys.id;
