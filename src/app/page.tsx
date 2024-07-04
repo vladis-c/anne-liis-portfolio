@@ -6,7 +6,8 @@ import Cube from '@/components/Animated/Cube';
 import {getFrontPage} from '@/api/getFrontPage';
 
 export default async function Home() {
-  await getFrontPage();
+  const fp = await getFrontPage();
+  console.log('got fp data', fp);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Cube />
