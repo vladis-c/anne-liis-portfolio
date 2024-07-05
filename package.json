@@ -2,14 +2,12 @@
   "name": "anne",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "script": "node script.js",
-    "compare": "node ./scripts/fetch_and_compare.js"
+    "script": "node script.js"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.22.1",

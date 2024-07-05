@@ -1,62 +1,86 @@
 import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
 import {Document, BLOCKS} from '@contentful/rich-text-types';
+import Link from 'next/link';
 
-const H1 = ({children}: {children: React.ReactNode}) => (
-  <h1 className="font-h text-8xl">{children}</h1>
+type TextProps = {children: React.ReactNode; className?: string};
+
+export const H1 = ({children, className}: TextProps) => (
+  <h1 className={`font-h text-8xl ${className}`}>{children}</h1>
 );
 
-const H2 = ({children}: {children: React.ReactNode}) => (
-  <h2 className="font-h text-5xl">{children}</h2>
+export const H2 = ({children, className}: TextProps) => (
+  <h2 className={`font-h text-5xl ${className}`}>{children}</h2>
 );
 
-const H3 = ({children}: {children: React.ReactNode}) => (
-  <h3 className="font-h text-4xl">{children}</h3>
+export const H3 = ({children, className}: TextProps) => (
+  <h3 className={`font-h text-4xl ${className}`}>{children}</h3>
 );
 
-const H4 = ({children}: {children: React.ReactNode}) => (
-  <h4 className="font-h text-3xl">{children}</h4>
+export const H4 = ({children, className}: TextProps) => (
+  <h4 className={`font-h text-3xl ${className}`}>{children}</h4>
 );
 
-const H5 = ({children}: {children: React.ReactNode}) => (
-  <h5 className="font-h text-2xl">{children}</h5>
+export const H5 = ({children, className}: TextProps) => (
+  <h5 className={`font-h text-2xl ${className}`}>{children}</h5>
 );
 
-const H6 = ({children}: {children: React.ReactNode}) => (
-  <h6 className="font-h text-xl">{children}</h6>
+export const H6 = ({children, className}: TextProps) => (
+  <h6 className={`font-h text-xl ${className}`}>{children}</h6>
 );
 
-const P = ({children}: {children: React.ReactNode}) => (
-  <p className="font-p text-lg">{children}</p>
+export const P = ({children, className}: TextProps) => (
+  <p className={`font-p text-lg ${className}`}>{children}</p>
 );
 
-const Contentful = ({document}: {document: Document}) => {
+type ClickableLinkProps = {
+  children: React.ReactNode;
+  id: string;
+};
+
+const ClickableLink = ({children, id}: ClickableLinkProps) => {
+  return <Link href={`#${id}`}>{children}</Link>;
+};
+
+type ContentfulProps = {document: Document; link?: boolean; className?: string};
+
+const Contentful = ({document, link, className}: ContentfulProps) => {
   const options = {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (_node: any, children: React.ReactNode) => (
-        <P>{children}</P>
+        <P className={className}>{children}</P>
       ),
       [BLOCKS.HEADING_1]: (_node: any, children: React.ReactNode) => (
-        <H1>{children}</H1>
+        <H1 className={className}>{children}</H1>
       ),
       [BLOCKS.HEADING_2]: (_node: any, children: React.ReactNode) => (
-        <H2>{children}</H2>
+        <H2 className={className}>{children}</H2>
       ),
       [BLOCKS.HEADING_3]: (_node: any, children: React.ReactNode) => (
-        <H3>{children}</H3>
+        <H3 className={className}>{children}</H3>
       ),
       [BLOCKS.HEADING_4]: (_node: any, children: React.ReactNode) => (
-        <H4>{children}</H4>
+        <H4 className={className}>{children}</H4>
       ),
       [BLOCKS.HEADING_5]: (_node: any, children: React.ReactNode) => (
-        <H5>{children}</H5>
+        <H5 className={className}>{children}</H5>
       ),
       [BLOCKS.HEADING_6]: (_node: any, children: React.ReactNode) => (
-        <H6>{children}</H6>
+        <H6 className={className}>{children}</H6>
       ),
     },
   };
+  //@ts-ignore
+  const id = document.content[0].content[0].value;
 
-  return documentToReactComponents(document, options);
+  if (link) {
+    return (
+      <ClickableLink id={id}>
+        <div id={id}>{documentToReactComponents(document, options)}</div>
+      </ClickableLink>
+    );
+  }
+
+  return <div id={id}>{documentToReactComponents(document, options)}</div>;
 };
 
 export default Contentful;
