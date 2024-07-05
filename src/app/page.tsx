@@ -16,13 +16,13 @@ export default async function Home() {
   } = homeContent;
 
   return (
-    <main className="flex flex-col items-center justify-between p-12">
+    <main className="flex flex-col items-center justify-between p-6 sm:p-12 md:p-12 lg:p-12 xl:p-12">
       {/* BG image */}
       {bgImage ? <BgImage url={bgImage} alt={'Bg image'} /> : null}
 
       {/* Navigation / logo / contacts */}
-      <div className="flex flex-row items-start justify-between w-full">
-        <div className="flex flex-row justify-start items-center">
+      <div className="flex flex-row items-start justify-center sm:justify-center md:justify-between lg:justify-between xl:justify-between w-full">
+        <div className="hidden sm:hidden md:flex lg:flex xl:flex flex-row justify-start items-center">
           {menu.map((el, i, self) => {
             if (i === self.length - 1) {
               return <H5 key={el}>{el}</H5>;
@@ -38,8 +38,11 @@ export default async function Home() {
             }
           })}
         </div>
-        <Contentful document={name} className="w-32 sm:w-32 md:w-32 lg:w-64 xl:w-64 text-center" />
-        <div className="flex flex-row justify-start items-center">
+        <Contentful
+          document={name}
+          className="w-64 sm:w-64 md:w-32 lg:w-64 xl:w-64 text-center"
+        />
+        <div className="hidden sm:hidden md:flex lg:flex xl:flex flex-row justify-start items-center">
           {contacts.map((el, i, self) => {
             const Element = () => {
               if (el.toLowerCase() === 'instagram') {
