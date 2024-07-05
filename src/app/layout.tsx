@@ -29,7 +29,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${italiana.variable} ${abel.variable}`}>
-      <body>{children}</body>
+      <body className='bg-indigo-custom'><div>{children}</div></body>
     </html>
   );
 }

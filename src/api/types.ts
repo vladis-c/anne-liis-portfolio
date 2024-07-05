@@ -1,8 +1,27 @@
+import {Document} from '@contentful/rich-text-types';
+
 export type Environment = 'master' | 'development' | 'staging';
+
+type EntryText = string;
+type EntryList = EntryText[];
+type EntryRichText = Document;
+// | {
+//     content: {
+//       content: {
+//         marks: any[];
+//         nodeType: string;
+//         value: string;
+//       }[];
+//       nodeType: string;
+//     }[];
+//     nodeType: string;
+//   }
+type EntryAsset = {sys: {id: string}};
+type EntryAssetList = EntryAsset[];
 
 // ENTRIES //
 export type ContentfulEntriesApiData = {
-  items: NavigationEntry[]; // | any other entry
+  items: Entry[];
   includes: {Asset: Asset[]};
   limit: number;
   skip: number;
@@ -10,8 +29,8 @@ export type ContentfulEntriesApiData = {
   total: number;
 };
 
-export type NavigationEntry = {
-  fields: Fields;
+type Entry = {
+  fields: NavigationFields | HeroFields;
   metadata: {
     concepts: any[];
     tags: any[];
@@ -19,46 +38,42 @@ export type NavigationEntry = {
   sys: ItemSys;
 };
 
-type Fields = {
-  contacts: {
-    [k in string]: string[];
-  };
-  imageUrl: {
-    [k in string]: string;
-  };
-  menu: {
-    [k in string]: string[];
-  };
-  name: {
-    [k in string]: {
-      content: {
-        content: {
-          marks: any[];
-          nodeType: string;
-          value: string;
-        }[];
-        nodeType: string;
-      }[];
-      nodeType: string;
-    };
-  };
-  tags: {
-    [k in string]: string[];
-  };
+export type HeroFields = {
   title: {
-    [k in string]: string;
+    [k in string]: EntryText;
+  };
+  short: {
+    [k in string]: EntryRichText;
+  };
+  heroTitle: {
+    [k in string]: EntryRichText;
+  };
+  heroText: {
+    [k in string]: EntryRichText;
   };
   image: {
-    [k in string]: {
-      sys: {id: string};
-    };
+    [k in string]: EntryAsset;
   };
-  images: {
-    [k in string]: [
-      {
-        sys: {id: string};
-      },
-    ];
+};
+
+export type NavigationFields = {
+  contacts: {
+    [k in string]: EntryList;
+  };
+  menu: {
+    [k in string]: EntryList;
+  };
+  name: {
+    [k in string]: EntryRichText;
+  };
+  tags: {
+    [k in string]: EntryList;
+  };
+  title: {
+    [k in string]: EntryText;
+  };
+  image: {
+    [k in string]: EntryAsset;
   };
 };
 
