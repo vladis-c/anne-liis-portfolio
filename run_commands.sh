@@ -5,6 +5,10 @@ set -e
 # Load environment variables from .env file
 export $(grep -v '^#' .env | xargs)
 
+# Fetch and compare JSON responses
+echo "Fetching and comparing JSON responses..."
+node fetch_and_compare.js
+
 # Execute the first command
 create_output=$(contentful-merge create --cda-token "$CDA_TOKEN" --space "$SPACE_ID" --source "$SOURCE_BRANCH" --target "$TARGET_BRANCH")
 echo "Create command output: $create_output"
@@ -16,10 +20,6 @@ if [ -z "$file_path" ]; then
   exit 1
 fi
 echo "Extracted file path: $file_path"
-
-# Fetch and compare JSON responses
-echo "Fetching and comparing JSON responses..."
-node fetch_and_compare.js
 
 # Execute the second command with auto-confirmation
 echo "Executing apply command with file path: $file_path"

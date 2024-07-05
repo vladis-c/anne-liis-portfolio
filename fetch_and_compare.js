@@ -15,7 +15,6 @@ if (!firstFetchUrl || !secondFetchUrl) {
 }
 
 async function fetchJson(url) {
-  console.log(url);
   const response = await fetch(url, {
     headers: {Authorization: `Bearer ${authToken}`},
     method: 'GET',
@@ -41,7 +40,6 @@ function extractAssetUrls(jsonResponse) {
 }
 
 async function updateAsset(asset) {
-  console.log('asset', asset);
   const assetId = asset.id;
   const assetUrl = asset.url;
   const assetName = asset.name;
@@ -107,7 +105,7 @@ async function updateAsset(asset) {
       );
     }
 
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // await new Promise(resolve => setTimeout(resolve, 2000));
 
     const response3 = await fetch(
       `${baseUrl}/environments/${targetBranch}/assets/${assetId}/published`,
@@ -141,9 +139,6 @@ async function compareAssets() {
 
     const firstAssets = extractAssetUrls(firstResponse);
     const secondAssets = extractAssetUrls(secondResponse);
-
-    console.log('firstAssets', firstAssets);
-    console.log('secondAssets', secondAssets);
 
     const secondAssetIds = new Set(secondAssets.map(asset => asset.id));
     const newAssets = firstAssets.filter(

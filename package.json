@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "script": "node ./scripts/script.js",
+    "script": "node script.js",
     "compare": "node ./scripts/fetch_and_compare.js"
   },
   "dependencies": {
