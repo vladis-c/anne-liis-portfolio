@@ -19,6 +19,7 @@ export default async function Home() {
     <main className="flex flex-col items-center justify-between p-12">
       {/* BG image */}
       {bgImage ? <BgImage url={bgImage} alt={'Bg image'} /> : null}
+
       {/* Navigation / logo / contacts */}
       <div className="flex flex-row items-start justify-between w-full">
         <div className="flex flex-row justify-start items-center">
@@ -37,7 +38,7 @@ export default async function Home() {
             }
           })}
         </div>
-        <Contentful document={name} className="w-64 text-center" />
+        <Contentful document={name} className="w-32 sm:w-32 md:w-32 lg:w-64 xl:w-64 text-center" />
         <div className="flex flex-row justify-start items-center">
           {contacts.map((el, i, self) => {
             const Element = () => {
