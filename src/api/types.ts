@@ -53,6 +53,13 @@ type Fields = {
       sys: {id: string};
     };
   };
+  images: {
+    [k in string]: [
+      {
+        sys: {id: string};
+      },
+    ];
+  };
 };
 
 type ItemSys = {

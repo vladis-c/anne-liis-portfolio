@@ -26,7 +26,7 @@ const s = {
         id: '6WEYOgqvoIrNUidpCyFwEq',
         type: 'Entry',
         createdAt: '2024-07-04T12:41:58.208Z',
-        updatedAt: '2024-07-04T19:05:08.453Z',
+        updatedAt: '2024-07-05T08:34:37.073Z',
         environment: {
           sys: {
             id: 'development',
@@ -34,10 +34,10 @@ const s = {
             linkType: 'Environment',
           },
         },
-        publishedVersion: 11,
-        publishedAt: '2024-07-04T19:05:08.453Z',
+        publishedVersion: 23,
+        publishedAt: '2024-07-05T08:34:37.073Z',
         firstPublishedAt: '2024-07-04T12:41:58.208Z',
-        revision: 2,
+        revision: 8,
         contentType: {
           sys: {
             type: 'Link',
@@ -63,8 +63,28 @@ const s = {
                 content: [
                   {
                     data: {},
-                    marks: [],
+                    marks: [
+                      {
+                        type: 'underline',
+                      },
+                    ],
                     value: 'Anne Liis Kasterpalu',
+                    nodeType: 'text',
+                  },
+                ],
+                nodeType: 'heading-2',
+              },
+              {
+                data: {},
+                content: [
+                  {
+                    data: {},
+                    marks: [
+                      {
+                        type: 'italic',
+                      },
+                    ],
+                    value: 'Vladislav Cherkasheninov',
                     nodeType: 'text',
                   },
                 ],
@@ -93,11 +113,81 @@ const s = {
             },
           },
         },
+        images: {
+          'en-US': [
+            {
+              sys: {
+                type: 'Link',
+                linkType: 'Asset',
+                id: '1C4TjJsXWm6CGjFv8Txb6e',
+              },
+            },
+            {
+              sys: {
+                type: 'Link',
+                linkType: 'Asset',
+                id: '6K8QA3heK7lC6uC9R13KVg',
+              },
+            },
+          ],
+        },
       },
     },
   ],
   includes: {
     Asset: [
+      {
+        metadata: {
+          tags: [],
+        },
+        sys: {
+          space: {
+            sys: {
+              type: 'Link',
+              linkType: 'Space',
+              id: '7kobn15v2krp',
+            },
+          },
+          id: '1C4TjJsXWm6CGjFv8Txb6e',
+          type: 'Asset',
+          createdAt: '2024-07-05T08:34:22.491Z',
+          updatedAt: '2024-07-05T08:34:22.491Z',
+          environment: {
+            sys: {
+              id: 'development',
+              type: 'Link',
+              linkType: 'Environment',
+            },
+          },
+          publishedVersion: 5,
+          publishedAt: '2024-07-05T08:34:22.491Z',
+          firstPublishedAt: '2024-07-05T08:34:22.491Z',
+          revision: 1,
+          urn: 'crn:contentful:::content:spaces/7kobn15v2krp/environments/development/assets/1C4TjJsXWm6CGjFv8Txb6e',
+        },
+        fields: {
+          title: {
+            'en-US': 'Cherry',
+          },
+          description: {
+            'en-US': 'Cherry blossom',
+          },
+          file: {
+            'en-US': {
+              url: '//images.ctfassets.net/7kobn15v2krp/1C4TjJsXWm6CGjFv8Txb6e/d49f3bc35af1b11feefb3ab8ccdf315e/3.jpg',
+              details: {
+                size: 4937942,
+                image: {
+                  width: 4160,
+                  height: 6240,
+                },
+              },
+              fileName: '3.jpg',
+              contentType: 'image/jpeg',
+            },
+          },
+        },
+      },
       {
         metadata: {
           tags: [],

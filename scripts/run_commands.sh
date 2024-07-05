@@ -17,9 +17,9 @@ if [ -z "$file_path" ]; then
 fi
 echo "Extracted file path: $file_path"
 
-# Modify the JSON file
-echo "Modifying JSON file..."
-node modify_json.js "$file_path"
+# Fetch and compare JSON responses
+echo "Fetching and comparing JSON responses..."
+node fetch_and_compare.js
 
 # Execute the second command with auto-confirmation
 echo "Executing apply command with file path: $file_path"
