@@ -2,8 +2,8 @@ import fetch from 'node-fetch';
 import 'dotenv/config';
 
 const baseUrl = process.env.BASE_URL;
-const firstFetchUrl = `${baseUrl}/environments/development/public/entries/`;
-const secondFetchUrl = `${baseUrl}/environments/staging/public/entries/`;
+const firstFetchUrl = `${baseUrl}/environments/development/assets/`;
+const secondFetchUrl = `${baseUrl}/environments/staging/assets/`;
 const authToken = process.env.CMA_TOKEN;
 const targetBranch = process.env.TARGET_BRANCH;
 
@@ -28,10 +28,10 @@ async function fetchJson(url) {
 }
 
 function extractAssetUrls(jsonResponse) {
-  if (!('includes' in jsonResponse)) {
+  if (!('items' in jsonResponse)) {
     return [];
   }
-  return jsonResponse.includes.Asset.map(asset => ({
+  return jsonResponse.items.map(asset => ({
     id: asset.sys.id,
     url: `https:${asset.fields.file['en-US'].url}`,
     name: asset.fields.file['en-US'].fileName,
@@ -141,6 +141,9 @@ async function compareAssets() {
 
     const firstAssets = extractAssetUrls(firstResponse);
     const secondAssets = extractAssetUrls(secondResponse);
+
+    console.log('firstAssets', firstAssets);
+    console.log('secondAssets', secondAssets);
 
     const secondAssetIds = new Set(secondAssets.map(asset => asset.id));
     const newAssets = firstAssets.filter(
