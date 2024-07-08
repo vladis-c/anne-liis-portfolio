@@ -14,7 +14,7 @@ export default async function Home() {
   }
   const {
     navigation: {bgImage, name, menu, contacts},
-    hero: {image, heroText, heroTitle},
+    hero: {image, heroText, heroTitle, short},
   } = homeContent;
 
   return (
@@ -34,9 +34,9 @@ export default async function Home() {
               return <H5 key={el}>{el}</H5>;
             } else {
               return (
-                <div key={el} className="flex flex-row">
+                <div id={el} key={el} className="flex flex-row">
                   <H5>{el}</H5>
-                  <div className="ml-2 mr-2 mt-1">
+                  <div aria-hidden className="ml-2 mr-2 mt-1">
                     <ArrowRight />
                   </div>
                 </div>
@@ -54,10 +54,10 @@ export default async function Home() {
           id="navigation contacts"
           className="hidden md:flex flex-row justify-start items-center">
           {contacts.map((el, i, self) => {
-            const Contact = () => {
+            const Contact = ({key}: {key: string}) => {
               if (el.toLowerCase() === 'instagram') {
                 return (
-                  <div className="relative -top-1" key={el}>
+                  <div id={key} className="relative -top-1" key={key}>
                     <Instagram />
                   </div>
                 );
@@ -71,8 +71,8 @@ export default async function Home() {
             } else {
               return (
                 <div className="flex flex-row" key={el}>
-                  <Contact />
-                  <div className="ml-2 mr-2 relative -top-1">
+                  <Contact key={el} />
+                  <div aria-hidden className="ml-2 mr-2 relative -top-1">
                     <VerticalDivider />
                   </div>
                 </div>
@@ -84,11 +84,11 @@ export default async function Home() {
       {/* Hero content */}
       <section
         id="hero"
-        className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-1080 bg-indigo-custom bg-transparent">
+        className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-1080 bg-anne-indigo bg-transparent">
         {/* Left block */}
         <div
           id="author"
-          className="flex justify-center items-center w-full lg:w-1/2 h-auto md:h-full px-12 lg:px-24 py-12 md:py-24">
+          className="relative flex justify-center items-center w-full lg:w-1/2 h-auto md:h-full px-12 lg:px-24 py-12 md:py-24">
           {/* Picture */}
           <div
             id="author picture cover"
@@ -106,13 +106,24 @@ export default async function Home() {
               aria-label="author picture"
             />
           </div>
+          <div className="absolute w-240 md:w-360 lg:w-480 -bottom-10 lg:bottom-40">
+            <Contentful document={short} color="gold" />
+          </div>
         </div>
+        {/* Divider */}
+        <div className="hidden lg:flex w-0.5 h-1080 bg-white" />
         {/* Right block */}
         <div
           id="about"
           className="flex flex-col justify-center items-center lg:items-start w-full lg:w-1/2 h-auto lg:h-full px-12 lg:px-24 py-24 gap-8">
-          <Contentful document={heroTitle} />
-          <Contentful document={heroText} />
+          <Contentful
+            document={heroTitle}
+            className="text-center lg:text-left"
+          />
+          <Contentful
+            document={heroText}
+            className="text-center lg:text-left"
+          />
         </div>
       </section>
     </main>

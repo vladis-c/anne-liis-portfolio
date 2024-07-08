@@ -11,7 +11,7 @@ type TextProps = {
 
 export const H1 = ({children, className = ''}: TextProps) => (
   <h1
-    className={`whitespace-break-spaces font-h text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl ${className}`}>
+    className={`whitespace-break-spaces font-h text-5xl md:text-6xl lg:text-7xl xl:text-8xl ${className}`}>
     {children}
   </h1>
 );
@@ -79,8 +79,8 @@ const Contentful = ({document, link, className, color}: ContentfulProps) => {
     color === 'gold'
       ? 'text-anne-gold'
       : color === 'white'
-      ? 'text-anne-white'
-      : 'text-anne-white';
+      ? 'text-white'
+      : 'text-white';
 
   const options = {
     renderNode: {
@@ -91,7 +91,7 @@ const Contentful = ({document, link, className, color}: ContentfulProps) => {
         <H1 className={`${className} ${textColor}`}>{children}</H1>
       ),
       [BLOCKS.HEADING_2]: (_node: any, children: React.ReactNode) => (
-        <H2 className={`${className} ${color}`}>{children}</H2>
+        <H2 className={`${className} ${textColor}`}>{children}</H2>
       ),
       [BLOCKS.HEADING_3]: (_node: any, children: React.ReactNode) => (
         <H3 className={`${className} ${textColor}`}>{children}</H3>

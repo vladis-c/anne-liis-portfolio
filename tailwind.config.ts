@@ -18,19 +18,22 @@ const config: Config = {
         h: ['var(--font-italiana)'], // header
       },
       height: {
+        '240': '240px',
         '360': '360px',
         '480': '480px',
         '720': '720px',
         '1080': '1080px',
       },
       width: {
+        '240': '240px',
         '360': '360px',
         '480': '480px',
         '720': '720px',
         '1080': '1080px',
       },
       colors: {
-        'indigo-custom': '#314154',
+        'anne-indigo': '#314154',
+        'anne-gold': '#E5B35E',
       },
     },
   },
