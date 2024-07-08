@@ -2,6 +2,7 @@ import {Document} from '@contentful/rich-text-types';
 
 export type Environment = 'master' | 'development' | 'staging';
 
+type EntryNumber = number;
 type EntryText = string;
 type EntryList = EntryText[];
 type EntryRichText = Document;
@@ -82,10 +83,13 @@ export type SectionFields = {
     [k in string]: EntryText;
   };
   sectionTitle: {
-    [k in string]: EntryRichText
+    [k in string]: EntryRichText;
   };
   images: {
     [k in string]: EntryAssetList;
+  };
+  index: {
+    [k in string]: EntryNumber;
   };
 };
 

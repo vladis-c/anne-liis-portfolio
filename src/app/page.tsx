@@ -15,6 +15,7 @@ export default async function Home() {
   const {
     navigation: {bgImage, name, menu, contacts},
     hero: {image, heroText, heroTitle, short},
+    sections,
   } = homeContent;
 
   return (
@@ -100,7 +101,7 @@ export default async function Home() {
             <NextImage
               priority
               src={image}
-              alt="Hero Image"
+              alt="author picture"
               width={360}
               height={480}
               placeholder="empty"
@@ -132,8 +133,38 @@ export default async function Home() {
       {/* Sections menu */}
       <section
         id="photo sections"
-        className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-1080 bg-anne-indigo-dark">
-        <div></div>
+        className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-1080 bg-anne-indigo-dark p-24">
+        {sections.map((section, i) => {
+          // @ts-ignore
+          const id = section.title.content[0].content[0].value;
+          const evenIndex = i % 2 !== 0;
+
+          return (
+            <div key={id} id={id} className="relative">
+              <div
+                id={`${id} title`}
+                className={`absolute ${evenIndex ? 'bottom-0' : 'top-0'}`}>
+                <Contentful document={section.title} />
+              </div>
+              <div
+                id="section picture cover"
+                aria-hidden
+                className="overflow-hidden w-300 h-540 rounded-xl">
+                <NextImage
+                  priority
+                  src={section.images[0]}
+                  alt={`${id} section picture`}
+                  width={300}
+                  height={540}
+                  placeholder="empty"
+                  className="w-full h-full object-cover"
+                  id={`${id} section picture`}
+                  aria-label={`${id} section picture`}
+                />
+              </div>
+            </div>
+          );
+        })}
       </section>
     </main>
   );

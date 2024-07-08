@@ -118,11 +118,15 @@ export const getHomeContent = async () => {
           images: [
             ...foundImages.map(el => 'https:' + el?.fields.file[LANG].url),
           ],
+          index: fields.index[LANG],
         };
       });
 
       if (mappedSections && mappedSections.length > 0) {
-        frontPageData.sections = mappedSections;
+        // sorting by provided index
+        frontPageData.sections = mappedSections.sort(
+          (a, b) => a.index - b.index,
+        );
       }
     }
 
