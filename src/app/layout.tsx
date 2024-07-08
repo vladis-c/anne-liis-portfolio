@@ -6,12 +6,13 @@ import './globals.css';
 import authOptions from './api/auth/[...nextauth]/authOptions';
 import {Environment} from '@/api/types';
 import {abel, italiana} from './fonts';
+import {AUTHOR} from '@/constants';
 
 const currentEnv = process.env.CURRENT_ENV as Environment;
 const stagingUser = process.env.STAGING_USER;
 
 export const metadata: Metadata = {
-  title: 'Anne Liis Kasterpalu',
+  title: AUTHOR,
   description: 'Portfolio website',
 };
 
@@ -29,7 +30,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${italiana.variable} ${abel.variable}`}>
-      <body className='bg-indigo-custom'><div>{children}</div></body>
+      <body className="bg-indigo-custom">{children}</body>
     </html>
   );
 }

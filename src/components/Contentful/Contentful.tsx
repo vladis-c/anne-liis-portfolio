@@ -52,6 +52,7 @@ export const P = ({children, className = ''}: TextProps) => (
     {children}
   </p>
 );
+
 type ClickableLinkProps = {
   children: React.ReactNode;
   id: string;
