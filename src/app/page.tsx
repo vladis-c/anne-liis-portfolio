@@ -54,10 +54,13 @@ export default async function Home() {
           id="navigation contacts"
           className="hidden md:flex flex-row justify-start items-center">
           {contacts.map((el, i, self) => {
-            const Contact = ({key}: {key: string}) => {
+            const Contact = () => {
               if (el.toLowerCase() === 'instagram') {
                 return (
-                  <div id={key} className="relative -top-1" key={key}>
+                  <div
+                    id={'Contact via ' + el}
+                    className="relative -top-1"
+                    key={el}>
                     <Instagram />
                   </div>
                 );
@@ -97,7 +100,7 @@ export default async function Home() {
             <NextImage
               priority
               src={image}
-              alt={'Hero Image'}
+              alt="Hero Image"
               width={360}
               height={480}
               placeholder="empty"
@@ -125,6 +128,12 @@ export default async function Home() {
             className="text-center lg:text-left"
           />
         </div>
+      </section>
+      {/* Sections menu */}
+      <section
+        id="photo sections"
+        className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-1080 bg-anne-indigo-dark">
+        <div></div>
       </section>
     </main>
   );

@@ -33,6 +33,7 @@ const config: Config = {
       },
       colors: {
         'anne-indigo': '#314154',
+        'anne-indigo-dark': '#292E38',
         'anne-gold': '#E5B35E',
       },
     },

@@ -30,7 +30,7 @@ export type ContentfulEntriesApiData = {
 };
 
 type Entry = {
-  fields: NavigationFields | HeroFields;
+  fields: NavigationFields | HeroFields | SectionFields;
   metadata: {
     concepts: any[];
     tags: any[];
@@ -74,6 +74,18 @@ export type NavigationFields = {
   };
   image: {
     [k in string]: EntryAsset;
+  };
+};
+
+export type SectionFields = {
+  title: {
+    [k in string]: EntryText;
+  };
+  sectionTitle: {
+    [k in string]: EntryRichText
+  };
+  images: {
+    [k in string]: EntryAssetList;
   };
 };
 

@@ -1,9 +1,19 @@
 import {Document} from '@contentful/rich-text-types';
 import {getContentful} from '.';
 import ENTRIES from './entries';
-import {ContentfulEntriesApiData, HeroFields, NavigationFields} from './types';
+import {
+  ContentfulEntriesApiData,
+  HeroFields,
+  NavigationFields,
+  SectionFields,
+} from './types';
 
 const LANG = 'en-US';
+
+type Section = {
+  title: Document;
+  images: string[];
+};
 
 type FrontPageData = {
   navigation: {
@@ -18,6 +28,7 @@ type FrontPageData = {
     heroTitle: Document;
     heroText: Document;
   };
+  sections: Section[];
 };
 
 export const getHomeContent = async () => {
@@ -33,6 +44,7 @@ export const getHomeContent = async () => {
         heroTitle: emptyDoc,
         heroText: emptyDoc,
       },
+      sections: [],
     } as FrontPageData;
 
     if (!allEntries) {
@@ -80,6 +92,37 @@ export const getHomeContent = async () => {
       );
       if (foundImage) {
         frontPageData.hero.image = 'https:' + foundImage.fields.file[LANG].url;
+      }
+    }
+
+    // Sections
+    const sectionEntries = allEntries.items.filter(
+      item => item.sys.contentType.sys.id === ENTRIES.CONTENT_TYPES.SECTION,
+    );
+
+    if (sectionEntries && sectionEntries.length > 0) {
+      const mappedSections = sectionEntries.map(section => {
+        const fields = section.fields as SectionFields;
+        const sectionImagesId = fields.images[LANG].map(image => image.sys.id);
+        const foundImages = sectionImagesId
+          .map(el => {
+            const foundImage = allEntries.includes.Asset.find(asset =>
+              asset.fields.file[LANG].url.includes(el),
+            );
+            return foundImage;
+          })
+          .filter(Boolean);
+
+        return {
+          title: fields.sectionTitle[LANG],
+          images: [
+            ...foundImages.map(el => 'https:' + el?.fields.file[LANG].url),
+          ],
+        };
+      });
+
+      if (mappedSections && mappedSections.length > 0) {
+        frontPageData.sections = mappedSections;
       }
     }
 

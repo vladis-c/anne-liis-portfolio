@@ -1,6 +1,7 @@
 const CONTENT_TYPES = {
   NAVIGATION: 'navigation',
   HERO: 'hero',
+  SECTION: 'section',
 } as const;
 
 const ENTRIES = {
