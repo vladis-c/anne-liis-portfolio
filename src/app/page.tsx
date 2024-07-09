@@ -2,9 +2,12 @@ import NextImage from 'next/image';
 import BgImage from '@/components/BgImage';
 import {getHomeContent} from '@/api/getHomeContent';
 import Contentful, {H5} from '@/components/Contentful/Contentful';
-import ArrowRight from '@/svgs/ArrowRight';
+import MenuArrow from '@/svgs/MenuArrow';
 import VerticalDivider from '@/svgs/VerticalDivider';
 import Instagram from '@/svgs/Instagram';
+import ArrowLeft from '@/svgs/ArrowLeft';
+import ArrowRight from '@/svgs/ArrowRight';
+import SectionImage from '@/svgs/SectionImage';
 
 export default async function Home() {
   const homeContent = await getHomeContent();
@@ -38,7 +41,7 @@ export default async function Home() {
                 <div id={el} key={el} className="flex flex-row">
                   <H5>{el}</H5>
                   <div aria-hidden className="ml-2 mr-2 mt-1">
-                    <ArrowRight />
+                    <MenuArrow />
                   </div>
                 </div>
               );
@@ -134,37 +137,31 @@ export default async function Home() {
       <section
         id="photo sections"
         className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-1080 bg-anne-indigo-dark p-24">
-        {sections.map((section, i) => {
+        <ArrowLeft />
+        {sections.slice(0, 3).map((section, i) => {
           // @ts-ignore
           const id = section.title.content[0].content[0].value;
           const evenIndex = i % 2 !== 0;
-
           return (
-            <div key={id} id={id} className="relative">
+            <div
+              key={id}
+              id={id}
+              className="relative flex justify-center items-center">
               <div
                 id={`${id} title`}
-                className={`absolute ${evenIndex ? 'bottom-0' : 'top-0'}`}>
+                className={`absolute ${evenIndex ? '-bottom-4' : '-top-14'}`}>
                 <Contentful document={section.title} />
               </div>
               <div
                 id="section picture cover"
                 aria-hidden
                 className="overflow-hidden w-300 h-540 rounded-xl">
-                <NextImage
-                  priority
-                  src={section.images[0]}
-                  alt={`${id} section picture`}
-                  width={300}
-                  height={540}
-                  placeholder="empty"
-                  className="w-full h-full object-cover"
-                  id={`${id} section picture`}
-                  aria-label={`${id} section picture`}
-                />
+                <SectionImage imageUrl={section.images[0]} id={id} />
               </div>
             </div>
           );
         })}
+        <ArrowRight />
       </section>
     </main>
   );
