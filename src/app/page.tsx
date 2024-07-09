@@ -42,8 +42,10 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between">
-      {/* BG image */}
+      {/* BG image on top */}
       {bgImage ? <BgImage url={bgImage} /> : null}
+      {/* Divider on Hero section */}
+      <div className="hidden lg:flex w-0.5 h-1080 bg-white absolute top-0 lg:top-[780px] xl:top-[1200px]" />
       {/* Navigation content */}
       <nav
         id="navigation"
@@ -136,8 +138,6 @@ export default async function Home() {
             <Contentful document={short} color="gold" />
           </div>
         </div>
-        {/* Divider */}
-        <div className="hidden lg:flex w-0.5 h-1080 bg-white" />
         {/* Right block */}
         <div
           id="about"
@@ -155,7 +155,7 @@ export default async function Home() {
       {/* Sections menu */}
       <section
         id="photo sections"
-        className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-1080 bg-anne-indigo-dark p-24">
+        className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-auto lg:h-1080 bg-anne-indigo-dark p-24">
         <Link href="#photo sections">
           <ArrowLeft />
         </Link>
@@ -169,11 +169,18 @@ export default async function Home() {
               key={`${id}-${i}`}
               id={`${id}-${i}`}
               className={`relative flex justify-center items-center ${
-                evenIndex ? '-bottom-8' : '-top-8'
-              }`}>
+                evenIndex ? 'top-0 lg:-bottom-8' : 'top-0 lg:-top-8'
+              } mb-20 lg:mb-0`}>
               <div
                 id={`${id} title`}
-                className={`absolute ${evenIndex ? '-bottom-4' : '-top-14'}`}>
+                className={`hidden lg:flex absolute ${
+                  evenIndex ? '-bottom-4' : '-top-14'
+                }`}>
+                <Contentful document={section.title} />
+              </div>
+              <div
+                id={`${id} title`}
+                className="flex lg:hidden absolute -top-14">
                 <Contentful document={section.title} />
               </div>
               <div
