@@ -1,8 +1,8 @@
 const SectionImage = ({imageUrl, id}: {imageUrl: string; id: string}) => {
   return (
     <svg
-      width="300"
-      height="540"
+      width="100%"
+      height="100%"
       viewBox="0 0 300 540"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

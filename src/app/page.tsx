@@ -1,13 +1,18 @@
 import NextImage from 'next/image';
+import Link from 'next/link';
+import {headers} from 'next/headers';
+
 import BgImage from '@/components/BgImage';
 import {getHomeContent} from '@/api/getHomeContent';
-import Contentful, {H5} from '@/components/Contentful/Contentful';
+import Contentful, {H5, P} from '@/components/Contentful/Contentful';
 import MenuArrow from '@/svgs/MenuArrow';
 import VerticalDivider from '@/svgs/VerticalDivider';
 import Instagram from '@/svgs/Instagram';
 import ArrowLeft from '@/svgs/ArrowLeft';
 import ArrowRight from '@/svgs/ArrowRight';
 import SectionImage from '@/svgs/SectionImage';
+
+const INDEX = 3;
 
 export default async function Home() {
   const homeContent = await getHomeContent();
@@ -20,6 +25,20 @@ export default async function Home() {
     hero: {image, heroText, heroTitle, short},
     sections,
   } = homeContent;
+
+  const headerList = headers();
+  const pathname = headerList.get('x-current-path');
+  const splittedPathname = pathname?.split('section=')[1];
+
+  const splittedSections = !splittedPathname
+    ? sections.slice(0, INDEX)
+    : sections.filter(section => {
+        // @ts-ignore
+        const id = section.title.content[0].content[0].value.toLowerCase();
+        if (splittedPathname !== undefined && splittedPathname === id) {
+          return section;
+        }
+      });
 
   return (
     <main className="flex flex-col items-center justify-between">
@@ -137,16 +156,21 @@ export default async function Home() {
       <section
         id="photo sections"
         className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-1080 bg-anne-indigo-dark p-24">
-        <ArrowLeft />
-        {sections.slice(0, 3).map((section, i) => {
+        <Link href="#photo sections">
+          <ArrowLeft />
+        </Link>
+        {splittedSections.map((section, i) => {
           // @ts-ignore
-          const id = section.title.content[0].content[0].value;
+          const id = section.title.content[0].content[0].value.toLowerCase();
           const evenIndex = i % 2 !== 0;
+
           return (
             <div
-              key={id}
-              id={id}
-              className="relative flex justify-center items-center">
+              key={`${id}-${i}`}
+              id={`${id}-${i}`}
+              className={`relative flex justify-center items-center ${
+                evenIndex ? '-bottom-8' : '-top-8'
+              }`}>
               <div
                 id={`${id} title`}
                 className={`absolute ${evenIndex ? '-bottom-4' : '-top-14'}`}>
@@ -155,13 +179,15 @@ export default async function Home() {
               <div
                 id="section picture cover"
                 aria-hidden
-                className="overflow-hidden w-300 h-540 rounded-xl">
+                className="overflow-hidden w-200 h-360 xl:w-300 xl:h-540">
                 <SectionImage imageUrl={section.images[0]} id={id} />
               </div>
             </div>
           );
         })}
-        <ArrowRight />
+        <Link href="#photo sections">
+          <ArrowRight />
+        </Link>
       </section>
     </main>
   );

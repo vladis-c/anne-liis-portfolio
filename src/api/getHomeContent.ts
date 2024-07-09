@@ -10,7 +10,7 @@ import {
 
 const LANG = 'en-US';
 
-type Section = {
+export type Section = {
   title: Document;
   images: string[];
 };
@@ -124,9 +124,11 @@ export const getHomeContent = async () => {
 
       if (mappedSections && mappedSections.length > 0) {
         // sorting by provided index
-        frontPageData.sections = mappedSections.sort(
-          (a, b) => a.index - b.index,
-        );
+        const sortedSections = mappedSections.sort((a, b) => a.index - b.index);
+        frontPageData.sections = [
+          ...sortedSections,
+          ...sortedSections.reverse(),
+        ];
       }
     }
 
