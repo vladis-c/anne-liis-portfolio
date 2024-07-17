@@ -11,6 +11,8 @@ import Instagram from '@/svgs/Instagram';
 import ArrowLeft from '@/svgs/ArrowLeft';
 import ArrowRight from '@/svgs/ArrowRight';
 import SectionImage from '@/svgs/SectionImage';
+import HeroImage from '@/svgs/HeroImage';
+import {AUTHOR} from '@/constants';
 
 const INDEX = 3;
 
@@ -122,17 +124,7 @@ export default async function Home() {
             id="author picture cover"
             aria-hidden
             className="overflow-hidden w-360 h-480 rounded-full">
-            <NextImage
-              priority
-              src={image}
-              alt="author picture"
-              width={360}
-              height={480}
-              placeholder="empty"
-              className="w-full h-full object-cover"
-              id="author picture"
-              aria-label="author picture"
-            />
+            <HeroImage imageUrl={image} />
           </div>
           <div className="absolute w-240 md:w-360 lg:w-480 -bottom-10 lg:bottom-40">
             <Contentful document={short} color="gold" />
