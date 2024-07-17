@@ -3,6 +3,7 @@ import {getContentful} from '.';
 import ENTRIES from './entries';
 import {
   ContentfulEntriesApiData,
+  CTAFields,
   HeroFields,
   NavigationFields,
   SectionFields,
@@ -29,6 +30,12 @@ type FrontPageData = {
     heroText: Document;
   };
   sections: Section[];
+  cta: {
+    title: Document;
+    text: Document;
+    contactTitle: Document;
+    messageTitle: Document;
+  };
 };
 
 export const getHomeContent = async () => {
@@ -37,14 +44,20 @@ export const getHomeContent = async () => {
 
     const emptyDoc = {} as Document;
     const frontPageData = {
-      navigation: {menu: [], name: emptyDoc, contacts: [], bgImage: ''},
+      navigation: {menu: [], name: {...emptyDoc}, contacts: [], bgImage: ''},
       hero: {
         image: '',
-        short: emptyDoc,
-        heroTitle: emptyDoc,
-        heroText: emptyDoc,
+        short: {...emptyDoc},
+        heroTitle: {...emptyDoc},
+        heroText: {...emptyDoc},
       },
       sections: [],
+      cta: {
+        title: {...emptyDoc},
+        text: {...emptyDoc},
+        contactTitle: {...emptyDoc},
+        messageTitle: {...emptyDoc},
+      },
     } as FrontPageData;
 
     if (!allEntries) {
@@ -130,6 +143,19 @@ export const getHomeContent = async () => {
           ...sortedSections.reverse(),
         ];
       }
+    }
+
+    // CTA
+    const CTAEntry = allEntries.items.find(
+      item => item.sys.contentType.sys.id === ENTRIES.CONTENT_TYPES.CTA,
+    );
+
+    if (CTAEntry) {
+      const fields = CTAEntry.fields as CTAFields;
+      frontPageData.cta.title = fields.title[LANG];
+      frontPageData.cta.text = fields.text[LANG];
+      frontPageData.cta.contactTitle = fields.contactTitle[LANG];
+      frontPageData.cta.messageTitle = fields.messageTitle[LANG];
     }
 
     return frontPageData;

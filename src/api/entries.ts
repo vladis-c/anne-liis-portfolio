@@ -2,6 +2,7 @@ const CONTENT_TYPES = {
   NAVIGATION: 'navigation',
   HERO: 'hero',
   SECTION: 'section',
+  CTA: 'cta'
 } as const;
 
 const ENTRIES = {

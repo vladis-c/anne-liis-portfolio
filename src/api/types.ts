@@ -31,7 +31,7 @@ export type ContentfulEntriesApiData = {
 };
 
 type Entry = {
-  fields: NavigationFields | HeroFields | SectionFields;
+  fields: NavigationFields | HeroFields | SectionFields | CTAFields;
   metadata: {
     concepts: any[];
     tags: any[];
@@ -40,7 +40,7 @@ type Entry = {
 };
 
 export type HeroFields = {
-  title: {
+  entryTitle: {
     [k in string]: EntryText;
   };
   short: {
@@ -70,7 +70,7 @@ export type NavigationFields = {
   tags: {
     [k in string]: EntryList;
   };
-  title: {
+  entryTitle: {
     [k in string]: EntryText;
   };
   image: {
@@ -79,7 +79,7 @@ export type NavigationFields = {
 };
 
 export type SectionFields = {
-  title: {
+  entryTitle: {
     [k in string]: EntryText;
   };
   sectionTitle: {
@@ -90,6 +90,24 @@ export type SectionFields = {
   };
   index: {
     [k in string]: EntryNumber;
+  };
+};
+
+export type CTAFields = {
+  entryTitle: {
+    [k in string]: EntryText;
+  };
+  title: {
+    [k in string]: EntryRichText;
+  };
+  text: {
+    [k in string]: EntryRichText;
+  };
+  contactTitle: {
+    [k in string]: EntryRichText;
+  };
+  messageTitle: {
+    [k in string]: EntryRichText;
   };
 };
 
