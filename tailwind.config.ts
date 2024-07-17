@@ -38,8 +38,10 @@ const config: Config = {
         '1080': '1080px',
       },
       colors: {
+        'anne-indigo-light': '#808D9A',
         'anne-indigo': '#314154',
         'anne-indigo-dark': '#292E38',
+        'anne-indigo-medium': '#314154',
         'anne-gold': '#E5B35E',
       },
     },

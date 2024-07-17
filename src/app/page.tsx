@@ -155,7 +155,6 @@ export default async function Home() {
           // @ts-ignore
           const id = section.title.content[0].content[0].value.toLowerCase();
           const evenIndex = i % 2 !== 0;
-
           return (
             <div
               key={`${id}-${i}`}
@@ -187,6 +186,20 @@ export default async function Home() {
         <Link href="#photo sections">
           <ArrowRight />
         </Link>
+      </section>
+      <section
+        id="contacts-footer"
+        className="flex w-full h-auto lg:h-1080 bg-anne-indigo-medium">
+        <section
+          id="contacts-footer"
+          className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-auto lg:h-1/2 bg-anne-indigo-light p-24">
+          <></>
+        </section>
+        <section
+          id="contacts-footer"
+          className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-auto lg:h-1/2 p-24">
+          <></>
+        </section>
       </section>
     </main>
   );
