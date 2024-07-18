@@ -16,7 +16,7 @@ export type Section = {
   images: string[];
 };
 
-type FrontPageData = {
+export type FrontPageData = {
   navigation: {
     menu: string[];
     name: Document;
