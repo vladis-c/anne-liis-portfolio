@@ -1,5 +1,3 @@
-import {Document} from '@contentful/rich-text-types';
-
 import Instagram from '@/svgs/Instagram';
 import MenuArrow from '@/svgs/MenuArrow';
 import VerticalDivider from '@/svgs/VerticalDivider';

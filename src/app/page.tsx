@@ -5,6 +5,7 @@ import Sections from '@/components/MainPage/Sections';
 
 import {omit} from '@/utils';
 import {getHomeContent} from '@/api/getHomeContent';
+import MotionDiv from '@/components/Animated/MotionDiv';
 
 export default async function Home() {
   const homeContent = await getHomeContent();
@@ -21,7 +22,21 @@ export default async function Home() {
       {/* Divider on Hero section */}
       <div className="hidden lg:flex w-0.5 h-1080 bg-white absolute top-0 lg:top-[780px] xl:top-[1200px]" />
       {/* Navigation content */}
-      <Nav {...omit(navigation, ['bgImage'])} />
+      <MotionDiv
+        className="w-full"
+        variants={{
+          hidden: {opacity: 0},
+          visible: {opacity: 1},
+        }}
+        initial="hidden"
+        animate="visible"
+        transition={{
+          ease: 'easeInOut',
+          duration: 0.5,
+        }}
+        viewport={{amount: 0}}>
+        <Nav {...omit(navigation, ['bgImage'])} />
+      </MotionDiv>
       {/* Hero content */}
       <Hero {...hero} />
       {/* Sections menu */}
