@@ -5,7 +5,7 @@ import Sections from '@/components/MainPage/Sections';
 
 import {omit} from '@/utils';
 import {getHomeContent} from '@/api/getHomeContent';
-import MotionDiv from '@/components/Animated/MotionDiv';
+import Scroll from '@/components/Animated/Scroll';
 
 export default async function Home() {
   const homeContent = await getHomeContent();
@@ -17,44 +17,34 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between">
-      {/* BG image on top */}
-      {navigation.bgImage ? <BgImage url={navigation.bgImage} /> : null}
-      {/* Divider on Hero section */}
-      <div className="hidden lg:flex w-0.5 h-1080 bg-white absolute top-0 lg:top-[780px] xl:top-[1200px]" />
-      {/* Navigation content */}
-      <MotionDiv
-        className="w-full"
-        variants={{
-          hidden: {opacity: 0},
-          visible: {opacity: 1},
-        }}
-        initial="hidden"
-        animate="visible"
-        transition={{
-          ease: 'easeInOut',
-          duration: 0.5,
-        }}
-        viewport={{amount: 0}}>
-        <Nav {...omit(navigation, ['bgImage'])} />
-      </MotionDiv>
-      {/* Hero content */}
-      <Hero {...hero} />
-      {/* Sections menu */}
-      <Sections sections={sections} />
-      <section
-        id="contacts-footer"
-        className="flex w-full h-auto lg:h-1080 bg-anne-indigo-medium">
+      <Scroll className="w-full">
+        <div className="w-full">
+          {/* BG image on top */}
+          {navigation.bgImage ? <BgImage url={navigation.bgImage} /> : null}
+          {/* Divider on Hero section */}
+          <div className="hidden lg:flex w-0.5 h-1080 bg-white absolute top-0 lg:top-[780px] xl:top-[1200px]" />
+          {/* Navigation content */}
+          <Nav {...omit(navigation, ['bgImage'])} />
+        </div>
+        {/* Hero content */}
+        <Hero {...hero} />
+        {/* Sections menu */}
+        <Sections sections={sections} />
         <section
           id="contacts-footer"
-          className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-auto lg:h-1/2 bg-anne-indigo-light p-24">
-          <></>
+          className="flex w-full h-auto lg:h-1080 bg-anne-indigo-medium">
+          <section
+            id="contacts-footer"
+            className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-auto lg:h-1/2 bg-anne-indigo-light p-24">
+            <></>
+          </section>
+          <section
+            id="contacts-footer"
+            className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-auto lg:h-1/2 p-24">
+            <></>
+          </section>
         </section>
-        <section
-          id="contacts-footer"
-          className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-auto lg:h-1/2 p-24">
-          <></>
-        </section>
-      </section>
+      </Scroll>
     </main>
   );
 }

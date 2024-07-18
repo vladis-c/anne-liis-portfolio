@@ -20,7 +20,7 @@ Portfolio site of Anne Liis.
 | CMS          | Contentful                     | Easy to use. Somewhat good free tier                                                                  |
 | SEO          | NextJS                         | SEO is included. Enriching code with the possibility to repost the conent of websites in Social Media | https://www.youtube.com/watch?v=EnO_C9pvZF0&t=17s https://www.youtube.com/watch?v=wTGVHLyV09M |
 | Styles       | Tailwind                       |
-| Animations   | React Spring                   | https://react-spring.dev/docs/getting-started                                                         |
+| Animations   | Framer Motion                  | https://www.youtube.com/watch?v=FKZAXFjxlJI                                                           |
 | Components   | Contentful CMS Rich Components | To be used along with HTML markup                                                                     |
 | Database     | Contentful                     | Database for content and assets. Upto 10000 units free.                                               |
 | Environments | Contentful                     | 3 environments free: Development, Staging and Production                                              |
@@ -31,12 +31,12 @@ Portfolio site of Anne Liis.
 
 ## UX/UI Design
 
-| \_\_           | \_\_     | \_\_        |
-| -------------- | -------- | ----------- |
-| Design/Styling | Adobe XD |             |
-| Colors         | ---      | **--TBD--** |
-| Fonts          | ---      | **--TBD--** |
-| Sizing         | ---      | **--TBD--** |
+| \_\_           | \_\_  | \_\_        |
+| -------------- | ----- | ----------- |
+| Design/Styling | Figma |             |
+| Colors         | ---   | **--TBD--** |
+| Fonts          | ---   | **--TBD--** |
+| Sizing         | ---   | **--TBD--** |
 
 - Colors, sizes and fonts to be decided
 
