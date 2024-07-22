@@ -1,9 +1,7 @@
-import BgImage from '@/components/MainPage/BgImage';
 import Nav from '@/components/MainPage/Nav';
 import Hero from '@/components/MainPage/Hero';
 import Sections from '@/components/MainPage/Sections';
 
-import {omit} from '@/utils';
 import {getHomeContent} from '@/api/getHomeContent';
 import Scroll from '@/components/Animated/Scroll';
 
@@ -18,14 +16,8 @@ export default async function Home() {
   return (
     <main className="flex flex-col items-center justify-between">
       <Scroll className="w-full">
-        <div className="w-full">
-          {/* BG image on top */}
-          {navigation.bgImage ? <BgImage url={navigation.bgImage} /> : null}
-          {/* Divider on Hero section */}
-          <div className="hidden lg:flex w-0.5 h-1080 bg-white absolute top-0 lg:top-[780px] xl:top-[1200px]" />
-          {/* Navigation content */}
-          <Nav {...omit(navigation, ['bgImage'])} />
-        </div>
+        {/* Navigation content */}
+        <Nav {...navigation} />
         {/* Hero content */}
         <Hero {...hero} />
         {/* Sections menu */}

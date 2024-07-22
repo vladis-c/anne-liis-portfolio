@@ -9,6 +9,8 @@ const Hero = ({image, heroText, heroTitle, short}: HeroProps) => {
     <section
       id="hero"
       className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-1080 bg-anne-indigo bg-transparent">
+      {/* Divider */}
+      <div className="hidden lg:flex w-0.5 h-1080 bg-white absolute left-1/2 top-[840px] xl:top-[1200px] z-10" />
       {/* Left block */}
       <div
         id="author"

@@ -4,14 +4,17 @@ import VerticalDivider from '@/svgs/VerticalDivider';
 
 import Contentful, {H5} from '../Contentful/Contentful';
 import {FrontPageData} from '@/api/getHomeContent';
+import BgImage from './BgImage';
 
-type NavProps = Omit<FrontPageData['navigation'], 'bgImage'>;
+type NavProps = FrontPageData['navigation'];
 
-const Nav = ({menu, name, contacts}: NavProps) => {
+const Nav = ({menu, name, contacts, bgImage}: NavProps) => {
   return (
     <nav
       id="navigation"
-      className="h-360 sm:h-360 md:h-480 lg:h-720 xl:h-1080 flex flex-row items-start justify-center sm:justify-center md:justify-between lg:justify-between xl:justify-between w-full p-6 sm:p-12 md:p-12 lg:p-12 xl:p-12">
+      className="h-720 md:h-720 xl:h-1080 flex flex-row items-start justify-center sm:justify-center md:justify-between lg:justify-between xl:justify-between w-full p-6 sm:p-12 md:p-12 lg:p-12 xl:p-12">
+      {/* BG Image */}
+      {bgImage ? <BgImage url={bgImage} /> : null}
       {/* Menu */}
       <div
         id="navigation menu"
