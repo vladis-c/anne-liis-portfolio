@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "script": "node script.js"
+    "merge": "node scripts/script.js"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.22.9",

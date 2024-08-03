@@ -3,7 +3,7 @@ import {Environment} from './types';
 
 const baseUrl = process.env.CONTENTFUL_BASE_URI;
 const spaceId = process.env.CONTENTFUL_SPACE_ID;
-const currentEnv = process.env.CURRENT_ENV ?? ('development' as Environment);
+const currentEnv = process.env.APP_ENV ?? ('development' as Environment);
 
 export const getContentful = async <Data>() => {
   try {

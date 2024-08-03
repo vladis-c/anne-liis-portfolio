@@ -3,11 +3,11 @@
 set -e
 
 # Load environment variables from .env file
-export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' .env.script | xargs)
 
 # Fetch and compare JSON responses
 echo "Fetching and comparing JSON responses..."
-node fetch_and_compare.js
+node compareEnvs.js
 
 # Execute the first command
 create_output=$(contentful-merge create --cda-token "$CDA_TOKEN" --space "$SPACE_ID" --source "$SOURCE_BRANCH" --target "$TARGET_BRANCH")

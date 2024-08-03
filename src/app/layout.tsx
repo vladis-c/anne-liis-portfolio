@@ -8,7 +8,7 @@ import {Environment} from '@/api/types';
 import {abel, italiana} from './fonts';
 import {AUTHOR} from '@/constants';
 
-const currentEnv = process.env.CURRENT_ENV as Environment;
+const currentEnv = process.env.APP_ENV as Environment;
 const stagingUser = process.env.STAGING_USER;
 
 export const metadata: Metadata = {
