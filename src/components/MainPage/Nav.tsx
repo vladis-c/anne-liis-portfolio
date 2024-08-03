@@ -17,7 +17,7 @@ const Nav = ({menu, name, contacts, bgImage}: NavProps) => {
       {bgImage ? <BgImage url={bgImage} /> : null}
       {/* Menu */}
       <div
-        id="navigation menu"
+        id="navigation_menu"
         className="hidden md:flex flex-row justify-start items-center">
         {menu.map((el, i, self) => {
           if (i === self.length - 1) {
@@ -41,14 +41,14 @@ const Nav = ({menu, name, contacts, bgImage}: NavProps) => {
       />
       {/* Contacts */}
       <div
-        id="navigation contacts"
+        id="navigation_contacts"
         className="hidden md:flex flex-row justify-start items-center">
         {contacts.map((el, i, self) => {
           const Contact = () => {
             if (el.toLowerCase() === 'instagram') {
               return (
                 <div
-                  id={'Contact via ' + el}
+                  id={'contact_via_' + el}
                   className="relative -top-1"
                   key={el}>
                   <Instagram />

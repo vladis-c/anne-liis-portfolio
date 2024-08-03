@@ -26,9 +26,9 @@ const Sections = ({sections}: SectionsProps) => {
       });
   return (
     <section
-      id="photo sections"
+      id="photo_sections"
       className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-auto lg:h-1080 bg-anne-indigo-dark p-24">
-      <Link href="#photo sections">
+      <Link href="#photo_sections">
         <ArrowLeft />
       </Link>
       {splittedSections.map((section, i) => {
@@ -37,23 +37,23 @@ const Sections = ({sections}: SectionsProps) => {
         const evenIndex = i % 2 !== 0;
         return (
           <div
-            key={`${id}-${i}`}
-            id={`${id}-${i}`}
+            key={`${id}_${i}`}
+            id={`${id}_${i}`}
             className={`relative flex justify-center items-center ${
               evenIndex ? 'top-0 lg:-bottom-8' : 'top-0 lg:-top-8'
             } mb-20 lg:mb-0`}>
             <div
-              id={`${id} title`}
+              id={`${id}_title`}
               className={`hidden lg:flex absolute ${
                 evenIndex ? '-bottom-4' : '-top-14'
               }`}>
               <Contentful document={section.title} />
             </div>
-            <div id={`${id} title`} className="flex lg:hidden absolute -top-14">
+            <div id={`${id}_title`} className="flex lg:hidden absolute -top-14">
               <Contentful document={section.title} />
             </div>
             <div
-              id="section picture cover"
+              id="section_picture_cover"
               aria-hidden
               className="overflow-hidden w-200 h-360 xl:w-300 xl:h-540">
               <SectionImage imageUrl={section.images[0]} id={id} />
@@ -61,7 +61,7 @@ const Sections = ({sections}: SectionsProps) => {
           </div>
         );
       })}
-      <Link href="#photo sections">
+      <Link href="#photo_sections">
         <ArrowRight />
       </Link>
     </section>

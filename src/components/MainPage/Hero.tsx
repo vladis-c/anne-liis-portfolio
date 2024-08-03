@@ -17,7 +17,7 @@ const Hero = ({image, heroText, heroTitle, short}: HeroProps) => {
         className="relative flex justify-center items-center w-full lg:w-1/2 h-auto md:h-full px-12 lg:px-24 py-12 md:py-24">
         {/* Picture */}
         <div
-          id="author picture cover"
+          id="author_image_cover"
           aria-hidden
           className="overflow-hidden w-360 h-480 rounded-full">
           <HeroImage imageUrl={image} />

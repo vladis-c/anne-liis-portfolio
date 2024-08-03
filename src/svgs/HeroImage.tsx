@@ -43,6 +43,7 @@ const HeroImage = ({imageUrl}: {imageUrl: string}) => {
           <stop offset="0.965" stopColor="#314154" stopOpacity="0.4" />
         </linearGradient>
         <image
+          aria-label="author_image"
           id="image0_10_36"
           width="2936"
           height="3000"
