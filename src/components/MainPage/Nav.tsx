@@ -3,7 +3,7 @@ import MenuArrow from '@/svgs/MenuArrow';
 import VerticalDivider from '@/svgs/VerticalDivider';
 
 import Contentful, {H5} from '../Contentful/Contentful';
-import {MainPageData} from '@/api/getHomeContent';
+import {MainPageData} from '@/api/getMainPageContent';
 import BgImage from './BgImage';
 
 type NavProps = MainPageData['navigation'];

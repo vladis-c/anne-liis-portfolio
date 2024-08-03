@@ -5,7 +5,7 @@ import ArrowLeft from '@/svgs/ArrowLeft';
 import ArrowRight from '@/svgs/ArrowRight';
 import SectionImage from '@/svgs/SectionImage';
 import Contentful from '../Contentful/Contentful';
-import {MainPageData} from '@/api/getHomeContent';
+import {MainPageData} from '@/api/getMainPageContent';
 
 type SectionsProps = {sections: MainPageData['sections']};
 const INDEX = 3;

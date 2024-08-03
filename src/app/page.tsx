@@ -2,11 +2,11 @@ import Nav from '@/components/MainPage/Nav';
 import Hero from '@/components/MainPage/Hero';
 import Sections from '@/components/MainPage/Sections';
 
-import {getHomeContent} from '@/api/getHomeContent';
+import {getMainPageContent} from '@/api/getMainPageContent';
 import Footer from '@/components/MainPage/Cta';
 
 export default async function Home() {
-  const homeContent = await getHomeContent();
+  const homeContent = await getMainPageContent();
 
   if (!homeContent) {
     return null;

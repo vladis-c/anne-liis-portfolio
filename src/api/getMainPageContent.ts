@@ -43,7 +43,7 @@ export type MainPageData = {
   };
 };
 
-export const getHomeContent = async () => {
+export const getMainPageContent = async () => {
   try {
     const allEntries = await getContentful<ContentfulEntriesApiData>();
 
@@ -82,8 +82,6 @@ export const getHomeContent = async () => {
       const fields = navigationEntry.fields as NavigationFields;
       mainPageData.navigation.menu = fields.menu[LANG];
       mainPageData.navigation.name = fields.name[LANG];
-
-      // navigationEntry.fields.name[LANG].content[0].content[0].value;
       mainPageData.navigation.contacts = fields.contacts[LANG];
 
       const bgImageId = fields.image[LANG].sys.id;
@@ -181,7 +179,7 @@ export const getHomeContent = async () => {
 
     return mainPageData;
   } catch (error) {
-    console.log('getNav error', error);
+    console.log('get main page content', error);
     return undefined;
   }
 };

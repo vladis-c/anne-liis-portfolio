@@ -1,5 +1,5 @@
 import HeroImage from '@/svgs/HeroImage';
-import {MainPageData} from '@/api/getHomeContent';
+import {MainPageData} from '@/api/getMainPageContent';
 import Contentful from '../Contentful/Contentful';
 
 type HeroProps = MainPageData['hero'];
