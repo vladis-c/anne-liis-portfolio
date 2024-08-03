@@ -1,7 +1,13 @@
 'use client';
 
 import {HTMLMotionProps, motion, useAnimation} from 'framer-motion';
-import React, {useEffect, useState, useCallback, useRef} from 'react';
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  LegacyRef,
+} from 'react';
 
 type ScrollProps = {children: React.ReactNode} & HTMLMotionProps<'div'>;
 
@@ -74,7 +80,12 @@ const Scroll = ({children, ...rest}: ScrollProps) => {
     <motion.div animate={controls} {...rest}>
       {React.Children.map(children, (child, index) => (
         <div
-          ref={el => (sectionRefs.current[index] = el as HTMLDivElement)}
+          ref={
+            ((el: HTMLDivElement) =>
+              (sectionRefs.current[index] = el)) as unknown as
+              | LegacyRef<HTMLDivElement>
+              | undefined
+          }
           className="h-auto">
           {child}
         </div>
