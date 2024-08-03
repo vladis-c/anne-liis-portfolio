@@ -4,6 +4,7 @@ import ENTRIES from './entries';
 import {
   ContentfulEntriesApiData,
   CTAFields,
+  FooterFields,
   HeroFields,
   NavigationFields,
   SectionFields,
@@ -36,6 +37,10 @@ export type MainPageData = {
     contactTitle: Document;
     messageTitle: Document;
   };
+  footer: {
+    text: Document;
+    contacts: string[];
+  };
 };
 
 export const getHomeContent = async () => {
@@ -43,7 +48,7 @@ export const getHomeContent = async () => {
     const allEntries = await getContentful<ContentfulEntriesApiData>();
 
     const emptyDoc = {} as Document;
-    const frontPageData = {
+    const mainPageData = {
       navigation: {menu: [], name: {...emptyDoc}, contacts: [], bgImage: ''},
       hero: {
         image: '',
@@ -58,10 +63,14 @@ export const getHomeContent = async () => {
         contactTitle: {...emptyDoc},
         messageTitle: {...emptyDoc},
       },
+      footer: {
+        text: {...emptyDoc},
+        contacts: [],
+      },
     } as MainPageData;
 
     if (!allEntries) {
-      return frontPageData;
+      return mainPageData;
     }
 
     // Navigation
@@ -71,18 +80,18 @@ export const getHomeContent = async () => {
 
     if (navigationEntry) {
       const fields = navigationEntry.fields as NavigationFields;
-      frontPageData.navigation.menu = fields.menu[LANG];
-      frontPageData.navigation.name = fields.name[LANG];
+      mainPageData.navigation.menu = fields.menu[LANG];
+      mainPageData.navigation.name = fields.name[LANG];
 
       // navigationEntry.fields.name[LANG].content[0].content[0].value;
-      frontPageData.navigation.contacts = fields.contacts[LANG];
+      mainPageData.navigation.contacts = fields.contacts[LANG];
 
       const bgImageId = fields.image[LANG].sys.id;
       const foundImage = allEntries.includes.Asset.find(asset =>
         asset.fields.file[LANG].url.includes(bgImageId),
       );
       if (foundImage) {
-        frontPageData.navigation.bgImage =
+        mainPageData.navigation.bgImage =
           'https:' + foundImage.fields.file[LANG].url;
       }
     }
@@ -95,16 +104,16 @@ export const getHomeContent = async () => {
     if (heroEntry) {
       const fields = heroEntry.fields as HeroFields;
 
-      frontPageData.hero.short = fields.short[LANG];
-      frontPageData.hero.heroTitle = fields.heroTitle[LANG];
-      frontPageData.hero.heroText = fields.heroText[LANG];
+      mainPageData.hero.short = fields.short[LANG];
+      mainPageData.hero.heroTitle = fields.heroTitle[LANG];
+      mainPageData.hero.heroText = fields.heroText[LANG];
 
       const heroImageId = fields.image[LANG].sys.id;
       const foundImage = allEntries.includes.Asset.find(asset =>
         asset.fields.file[LANG].url.includes(heroImageId),
       );
       if (foundImage) {
-        frontPageData.hero.image = 'https:' + foundImage.fields.file[LANG].url;
+        mainPageData.hero.image = 'https:' + foundImage.fields.file[LANG].url;
       }
     }
 
@@ -138,7 +147,7 @@ export const getHomeContent = async () => {
       if (mappedSections && mappedSections.length > 0) {
         // sorting by provided index
         const sortedSections = mappedSections.sort((a, b) => a.index - b.index);
-        frontPageData.sections = [
+        mainPageData.sections = [
           ...sortedSections,
           ...sortedSections.reverse(),
         ];
@@ -152,13 +161,25 @@ export const getHomeContent = async () => {
 
     if (CTAEntry) {
       const fields = CTAEntry.fields as CTAFields;
-      frontPageData.cta.title = fields.title[LANG];
-      frontPageData.cta.text = fields.text[LANG];
-      frontPageData.cta.contactTitle = fields.contactTitle[LANG];
-      frontPageData.cta.messageTitle = fields.messageTitle[LANG];
+      mainPageData.cta.title = fields.title[LANG];
+      mainPageData.cta.text = fields.text[LANG];
+      mainPageData.cta.contactTitle = fields.contactTitle[LANG];
+      mainPageData.cta.messageTitle = fields.messageTitle[LANG];
     }
 
-    return frontPageData;
+    // Footer
+
+    const footerEntry = allEntries.items.find(
+      item => item.sys.contentType.sys.id === ENTRIES.CONTENT_TYPES.FOOTER,
+    );
+
+    if (footerEntry) {
+      const fields = footerEntry.fields as FooterFields;
+      mainPageData.footer.contacts = fields.contacts[LANG];
+      mainPageData.footer.text = fields.text[LANG];
+    }
+
+    return mainPageData;
   } catch (error) {
     console.log('getNav error', error);
     return undefined;

@@ -31,7 +31,7 @@ export type ContentfulEntriesApiData = {
 };
 
 type Entry = {
-  fields: NavigationFields | HeroFields | SectionFields | CTAFields;
+  fields: NavigationFields | HeroFields | SectionFields | CTAFields | FooterFields;
   metadata: {
     concepts: any[];
     tags: any[];
@@ -108,6 +108,18 @@ export type CTAFields = {
   };
   messageTitle: {
     [k in string]: EntryRichText;
+  };
+};
+
+export type FooterFields = {
+  entryTitle: {
+    [k in string]: EntryText;
+  };
+  text: {
+    [k in string]: EntryRichText;
+  };
+  contacts: {
+    [k in string]: EntryList;
   };
 };
 

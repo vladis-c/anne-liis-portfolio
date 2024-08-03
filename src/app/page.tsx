@@ -11,7 +11,7 @@ export default async function Home() {
   if (!homeContent) {
     return null;
   }
-  const {navigation, hero, sections, cta} = homeContent;
+  const {navigation, hero, sections, cta, footer} = homeContent;
 
   return (
     <main className="flex flex-col items-center justify-between">
@@ -21,7 +21,7 @@ export default async function Home() {
       <Hero {...hero} />
       {/* Sections menu */}
       <Sections sections={sections} />
-      <Footer cta={cta} />
+      <Footer cta={cta} footer={footer} />
     </main>
   );
 }
