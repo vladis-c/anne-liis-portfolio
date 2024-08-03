@@ -3,10 +3,10 @@ import MenuArrow from '@/svgs/MenuArrow';
 import VerticalDivider from '@/svgs/VerticalDivider';
 
 import Contentful, {H5} from '../Contentful/Contentful';
-import {FrontPageData} from '@/api/getHomeContent';
+import {MainPageData} from '@/api/getHomeContent';
 import BgImage from './BgImage';
 
-type NavProps = FrontPageData['navigation'];
+type NavProps = MainPageData['navigation'];
 
 const Nav = ({menu, name, contacts, bgImage}: NavProps) => {
   return (

@@ -3,7 +3,7 @@ import Hero from '@/components/MainPage/Hero';
 import Sections from '@/components/MainPage/Sections';
 
 import {getHomeContent} from '@/api/getHomeContent';
-import Scroll from '@/components/Animated/Scroll';
+import Footer from '@/components/MainPage/Cta';
 
 export default async function Home() {
   const homeContent = await getHomeContent();
@@ -11,7 +11,7 @@ export default async function Home() {
   if (!homeContent) {
     return null;
   }
-  const {navigation, hero, sections} = homeContent;
+  const {navigation, hero, sections, cta} = homeContent;
 
   return (
     <main className="flex flex-col items-center justify-between">
@@ -21,20 +21,7 @@ export default async function Home() {
       <Hero {...hero} />
       {/* Sections menu */}
       <Sections sections={sections} />
-      <section
-        id="contacts-footer"
-        className="flex w-full h-auto lg:h-1080 bg-anne-indigo-medium">
-        <section
-          id="contacts-footer"
-          className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-auto lg:h-1/2 bg-anne-indigo-light p-24">
-          <></>
-        </section>
-        <section
-          id="contacts-footer"
-          className="flex flex-col lg:flex-row justify-start lg:justify-between items-center w-full h-auto lg:h-1/2 p-24">
-          <></>
-        </section>
-      </section>
+      <Footer cta={cta} />
     </main>
   );
 }

@@ -1,8 +1,8 @@
 import HeroImage from '@/svgs/HeroImage';
-import {FrontPageData} from '@/api/getHomeContent';
+import {MainPageData} from '@/api/getHomeContent';
 import Contentful from '../Contentful/Contentful';
 
-type HeroProps = FrontPageData['hero'];
+type HeroProps = MainPageData['hero'];
 
 const Hero = ({image, heroText, heroTitle, short}: HeroProps) => {
   return (

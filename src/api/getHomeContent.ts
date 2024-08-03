@@ -16,7 +16,7 @@ export type Section = {
   images: string[];
 };
 
-export type FrontPageData = {
+export type MainPageData = {
   navigation: {
     menu: string[];
     name: Document;
@@ -58,7 +58,7 @@ export const getHomeContent = async () => {
         contactTitle: {...emptyDoc},
         messageTitle: {...emptyDoc},
       },
-    } as FrontPageData;
+    } as MainPageData;
 
     if (!allEntries) {
       return frontPageData;
