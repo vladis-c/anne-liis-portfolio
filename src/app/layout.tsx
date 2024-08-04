@@ -9,7 +9,7 @@ import {abel, italiana} from './fonts';
 import {AUTHOR} from '@/constants';
 
 const currentEnv = process.env.APP_ENV as Environment;
-const stagingUser = process.env.STAGING_USER;
+const admins = (process.env.ADMIN ?? '').split('|');
 
 export const metadata: Metadata = {
   title: AUTHOR,
@@ -24,7 +24,11 @@ export default async function RootLayout({
   const session =
     currentEnv === 'staging' && (await getServerSession(authOptions));
 
-  if (typeof session !== 'boolean' && session?.user?.name !== stagingUser) {
+  if (
+    typeof session !== 'boolean' &&
+    session?.user?.name &&
+    !admins.includes(session.user.name)
+  ) {
     children = <p>Unauthorized</p>;
   }
 
