@@ -23,4 +23,4 @@ echo "Extracted file path: $file_path"
 
 # Execute the second command with auto-confirmation
 echo "Executing apply command with file path: $file_path"
-echo "Y" | contentful-merge apply --cma-token "$CMA_TOKEN" --space "$SPACE_ID" --environment "staging" --file "$file_path"
+echo "Y" | contentful-merge apply --cma-token "$CMA_TOKEN" --space "$SPACE_ID" --environment "$TARGET_BRANCH" --file "$file_path"
