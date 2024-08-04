@@ -1,18 +1,18 @@
 import type {Metadata} from 'next';
-import {Inter} from 'next/font/google';
+
 import {getServerSession} from 'next-auth';
 
 import './globals.css';
-import {authOptions} from './api/auth/[...nextauth]/route';
-import {Environment} from '@/types';
+import authOptions from './api/auth/[...nextauth]/authOptions';
+import {Environment} from '@/api/types';
+import {abel, italiana} from './fonts';
+import {AUTHOR} from '@/constants';
 
-const inter = Inter({subsets: ['latin']});
-
-const currentEnv = process.env.CURRENT_ENV as Environment;
-const stagingUser = process.env.STAGING_USER;
+const currentEnv = process.env.APP_ENV as Environment;
+const admins = (process.env.ADMIN ?? '').split('|');
 
 export const metadata: Metadata = {
-  title: 'Anne Liis Kasterpalu',
+  title: AUTHOR,
   description: 'Portfolio website',
 };
 
@@ -24,13 +24,17 @@ export default async function RootLayout({
   const session =
     currentEnv === 'staging' && (await getServerSession(authOptions));
 
-  if (typeof session !== 'boolean' && session?.user?.name !== stagingUser) {
+  if (
+    typeof session !== 'boolean' &&
+    session?.user?.name &&
+    !admins.includes(session.user.name)
+  ) {
     children = <p>Unauthorized</p>;
   }
 
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${italiana.variable} ${abel.variable}`}>
+      <body className="bg-anne-indigo">{children}</body>
     </html>
   );
 }

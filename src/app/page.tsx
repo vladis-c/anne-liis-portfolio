@@ -1,32 +1,27 @@
-import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
+import Nav from '@/components/MainPage/Nav';
+import Hero from '@/components/MainPage/Hero';
+import Sections from '@/components/MainPage/Sections';
 
-import Link from 'next/link';
-
-import {getPosts} from '@/api';
-import Image from '@/components/Image';
+import {getMainPageContent} from '@/api/getMainPageContent';
+import Footer from '@/components/MainPage/Cta';
 
 export default async function Home() {
-  const documents = await getPosts();
+  const homeContent = await getMainPageContent();
 
-  const Contents = (): React.ReactNode => {
-    return documents && documents.length > 0
-      ? documents.map(d => {
-          const Text = documentToReactComponents(d.document);
-          return (
-            <div key={d.id}>
-              <Link href={`/posts/${d.slug}`}>
-                {d.image ? <Image url={d.image.url} alt={d.title} /> : null}
-                {Text}
-              </Link>
-            </div>
-          );
-        })
-      : null;
-  };
+  if (!homeContent) {
+    return null;
+  }
+  const {navigation, hero, sections, cta, footer} = homeContent;
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <p>Checking if it works. This name is fetched from the server</p>
-      {Contents()}
+    <main className="flex flex-col items-center justify-between">
+      {/* Navigation content */}
+      <Nav {...navigation} />
+      {/* Hero content */}
+      <Hero {...hero} />
+      {/* Sections menu */}
+      <Sections sections={sections} />
+      <Footer cta={cta} footer={footer} />
     </main>
   );
 }

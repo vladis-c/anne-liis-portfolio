@@ -6,24 +6,30 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "merge": "node scripts/script.js"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^15.19.3",
-    "@contentful/rich-text-types": "^16.3.3",
-    "next": "14.1.0",
-    "next-auth": "^4.24.5",
-    "react": "^18",
-    "react-dom": "^18"
+    "@contentful/rich-text-react-renderer": "^15.22.9",
+    "@contentful/rich-text-types": "^16.8.3",
+    "eslint-config-next": "^14.2.5",
+    "framer-motion": "^11.3.21",
+    "next": "^14.2.5",
+    "next-auth": "^4.24.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
+    "@types/node": "^22.1.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.20",
+    "child_process": "^1.0.2",
+    "dotenv": "^16.4.5",
     "eslint": "^8.56.0",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "node-fetch": "^3.3.2",
+    "postcss": "^8.4.40",
+    "tailwindcss": "^3.4.7",
+    "typescript": "^5.5.4"
   }
 }
