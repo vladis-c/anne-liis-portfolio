@@ -68,7 +68,7 @@ const ClickableLink = ({children, id}: ClickableLinkProps) => {
 };
 
 type ContentfulProps = {
-  document: Document;
+  document: Document | null;
   link?: string;
   className?: string;
   color?: TextColor;
@@ -107,9 +107,9 @@ const Contentful = ({document, link, className, color}: ContentfulProps) => {
       ),
     },
   };
-  //@ts-ignore
-  // const id = document.content[0].content[0].value;
-
+  if (!document) {
+    return null;
+  }
   if (link) {
     return (
       <ClickableLink id={link}>

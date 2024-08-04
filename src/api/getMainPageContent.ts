@@ -20,25 +20,25 @@ export type Section = {
 export type MainPageData = {
   navigation: {
     menu: string[];
-    name: Document;
+    name: Document | null;
     contacts: string[];
     bgImage: string;
   };
   hero: {
     image: string;
-    short: Document;
-    heroTitle: Document;
-    heroText: Document;
+    short: Document | null;
+    heroTitle: Document | null;
+    heroText: Document | null;
   };
   sections: Section[];
   cta: {
-    title: Document;
-    text: Document;
-    contactTitle: Document;
-    messageTitle: Document;
+    title: Document | null;
+    text: Document | null;
+    contactTitle: Document | null;
+    messageTitle: Document | null;
   };
   footer: {
-    text: Document;
+    text: Document | null;
     contacts: string[];
   };
 };
@@ -47,29 +47,28 @@ export const getMainPageContent = async () => {
   try {
     const allEntries = await getContentful<ContentfulEntriesApiData>();
 
-    const emptyDoc = {} as Document;
     const mainPageData = {
-      navigation: {menu: [], name: {...emptyDoc}, contacts: [], bgImage: ''},
+      navigation: {menu: [], name: null, contacts: [], bgImage: ''},
       hero: {
         image: '',
-        short: {...emptyDoc},
-        heroTitle: {...emptyDoc},
-        heroText: {...emptyDoc},
+        short: null,
+        heroTitle: null,
+        heroText: null,
       },
       sections: [],
       cta: {
-        title: {...emptyDoc},
-        text: {...emptyDoc},
-        contactTitle: {...emptyDoc},
-        messageTitle: {...emptyDoc},
+        title: null,
+        text: null,
+        contactTitle: null,
+        messageTitle: null,
       },
       footer: {
-        text: {...emptyDoc},
+        text: null,
         contacts: [],
       },
     } as MainPageData;
 
-    if (!allEntries) {
+    if (!allEntries || !allEntries.items.length) {
       return mainPageData;
     }
 
