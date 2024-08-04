@@ -1,14 +1,15 @@
 import type {Metadata} from 'next';
-
 import {getServerSession} from 'next-auth';
+import {redirect} from 'next/navigation';
 
 import './globals.css';
 import authOptions from './api/auth/[...nextauth]/authOptions';
 import {Environment} from '@/api/types';
 import {abel, italiana} from './fonts';
 import {AUTHOR} from '@/constants';
+import {H4} from '@/components/Contentful/Contentful';
 
-const currentEnv = process.env.APP_ENV as Environment;
+const isStagingEnv = (process.env.APP_ENV as Environment) === 'staging';
 const admins = (process.env.ADMIN ?? '').split('|');
 
 export const metadata: Metadata = {
@@ -21,15 +22,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session =
-    currentEnv === 'staging' && (await getServerSession(authOptions));
+  const auth = await getServerSession(authOptions);
 
-  if (
-    typeof session !== 'boolean' &&
-    session?.user?.name &&
-    !admins.includes(session.user.name)
-  ) {
-    children = <p>Unauthorized</p>;
+  if (isStagingEnv && !auth) {
+    return redirect('api/auth/signin');
+  }
+
+  if (isStagingEnv && auth?.user?.name && !admins.includes(auth?.user?.name)) {
+    children = <H4>Unauthorized</H4>;
   }
 
   return (
