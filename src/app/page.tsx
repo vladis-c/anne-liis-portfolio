@@ -3,7 +3,7 @@ import Hero from '@/components/MainPage/Hero';
 import Sections from '@/components/MainPage/Sections';
 
 import {getMainPageContent} from '@/api/getMainPageContent';
-import Footer from '@/components/MainPage/Cta';
+import Footer from '@/components/MainPage/Footer';
 
 export default async function Home() {
   const homeContent = await getMainPageContent();
