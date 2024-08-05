@@ -15,7 +15,7 @@ export const getContentful = async <Data>() => {
           Authorization: `Bearer ${process.env.CONTENTFUL_MANAGEMENT_KEY}`,
         },
         next: {
-          // revalidate: 10,
+          revalidate: currentEnv === 'staging' ? 10 : 60 * 60, // 10 secs vs 1 hour
           tags: [ENTRIES.ENTRIES],
         },
       },

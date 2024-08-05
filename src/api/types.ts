@@ -6,17 +6,6 @@ type EntryNumber = number;
 type EntryText = string;
 type EntryList = EntryText[];
 type EntryRichText = Document;
-// | {
-//     content: {
-//       content: {
-//         marks: any[];
-//         nodeType: string;
-//         value: string;
-//       }[];
-//       nodeType: string;
-//     }[];
-//     nodeType: string;
-//   }
 type EntryAsset = {sys: {id: string}};
 type EntryAssetList = EntryAsset[];
 
