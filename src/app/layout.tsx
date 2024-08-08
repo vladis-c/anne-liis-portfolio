@@ -33,7 +33,9 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" className={`${italiana.variable} ${abel.variable}`}>
+    <html
+      lang="en"
+      className={`${italiana.variable} ${abel.variable} snap-y snap-mandatory`}>
       <body className="bg-anne-indigo">{children}</body>
     </html>
   );
